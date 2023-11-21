@@ -1,6 +1,11 @@
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  type MouseEvent,
+} from 'react';
 import { useLocalStorage } from 'usehooks-ts';
-import { isIOS, isIPad13 } from 'react-device-detect';
-import { useCallback, useEffect, type MouseEvent } from 'react';
+import { useDeviceSelectors } from 'react-device-detect';
 
 import { Prompt } from './prompt.tsx';
 
@@ -23,9 +28,13 @@ export type PwaPromptData = {
   visits: number;
 };
 
-const deviceCheck = () => {
+const deviceCheck = (
+  isIOS: boolean,
+  isIPad13: boolean,
+  navigator: Navigator
+) => {
   const isStandalone =
-    'standalone' in window.navigator && window.navigator.standalone;
+    !!navigator && 'standalone' in navigator && navigator.standalone;
 
   return (isIOS || isIPad13) && !isStandalone;
 };
@@ -45,10 +54,12 @@ export const PwaPrompt = ({
   debug = false,
   onClose = undefined,
 }: PwaPromptProps) => {
+  const [{ isIOS, isIPad13 }] = useDeviceSelectors(window.navigator.userAgent);
+
   const [iosPwaPrompt, setIosPwaPrompt] = useLocalStorage<PwaPromptData>(
     PwaPromptDataKey,
     {
-      isiOS: deviceCheck(),
+      isiOS: deviceCheck(isIOS, isIPad13, window.navigator),
       visits: 0,
     }
   );
@@ -60,6 +71,13 @@ export const PwaPrompt = ({
         visits: prevState.visits + 1,
       }));
   }, [setIosPwaPrompt, iosPwaPrompt.isiOS]);
+
+  useLayoutEffect(() => {
+    setIosPwaPrompt((prevState) => ({
+      ...prevState,
+      isiOS: deviceCheck(isIOS, isIPad13, window.navigator),
+    }));
+  }, [setIosPwaPrompt, isIOS, isIPad13]);
 
   const onDismiss = useCallback(
     (e: MouseEvent) => {
@@ -83,8 +101,9 @@ export const PwaPrompt = ({
   const aboveMinVisits = iosPwaPrompt.visits >= promptOnVisit;
   const belowMaxVisits = iosPwaPrompt.visits < promptOnVisit + timesToShow;
 
-  if ((!iosPwaPrompt.isiOS || !aboveMinVisits || !belowMaxVisits) && !debug)
+  if ((!iosPwaPrompt.isiOS || !aboveMinVisits || !belowMaxVisits) && !debug) {
     return null;
+  }
 
   return (
     <Prompt

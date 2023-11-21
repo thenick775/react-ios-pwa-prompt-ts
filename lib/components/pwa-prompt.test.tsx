@@ -35,8 +35,12 @@ describe('<PwaPrompt />', () => {
   beforeEach(() => {
     window.localStorage.clear();
 
-    vi.spyOn(rddExports, 'isIOS', 'get').mockReturnValue(true);
-    vi.spyOn(rddExports, 'isIPad13', 'get').mockReturnValue(false);
+    vi.spyOn(rddExports, 'useDeviceSelectors').mockReturnValue([
+      {
+        isIOS: true,
+        isIPad13: false,
+      },
+    ]);
     vi.spyOn(window, 'navigator', 'get').mockReturnValue({
       standalone: false,
     } as unknown as Navigator);
@@ -54,8 +58,12 @@ describe('<PwaPrompt />', () => {
   });
 
   test('renders PwaPrompt if on an ipad iOS browser not in standalone mode', async () => {
-    vi.spyOn(rddExports, 'isIOS', 'get').mockReturnValue(false);
-    vi.spyOn(rddExports, 'isIPad13', 'get').mockReturnValue(true);
+    vi.spyOn(rddExports, 'useDeviceSelectors').mockReturnValue([
+      {
+        isIOS: false,
+        isIPad13: true,
+      },
+    ]);
 
     render(<PwaPrompt />);
 
@@ -68,8 +76,12 @@ describe('<PwaPrompt />', () => {
   });
 
   test('does not render PwaPrompt if not an ipad or iOS browser', () => {
-    vi.spyOn(rddExports, 'isIOS', 'get').mockReturnValue(false);
-    vi.spyOn(rddExports, 'isIPad13', 'get').mockReturnValue(false);
+    vi.spyOn(rddExports, 'useDeviceSelectors').mockReturnValue([
+      {
+        isIOS: false,
+        isIPad13: false,
+      },
+    ]);
 
     render(<PwaPrompt />);
 
@@ -77,7 +89,7 @@ describe('<PwaPrompt />', () => {
     expect(screen.queryByTestId('prompt-wrapper')).not.toBeInTheDocument();
   });
 
-  test('does not render if already in standalone mode', async () => {
+  test('does not render PwaPrompt if already in standalone mode', async () => {
     vi.spyOn(window, 'navigator', 'get').mockReturnValue({
       standalone: true,
     } as unknown as Navigator);
@@ -89,7 +101,7 @@ describe('<PwaPrompt />', () => {
     expect(screen.queryByTestId('prompt-wrapper')).not.toBeInTheDocument();
   });
 
-  test('dismisses prompt using overlay', async () => {
+  test('dismisses PwaPrompt using overlay', async () => {
     const user = userEvent.setup();
 
     render(<PwaPrompt />);
@@ -104,6 +116,26 @@ describe('<PwaPrompt />', () => {
 
     // Dismiss the prompt
     await user.click(screen.getByTestId('prompt-overlay'));
+
+    expect(screen.queryByTestId('prompt-overlay')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('prompt-wrapper')).not.toBeInTheDocument();
+  });
+
+  test('dismisses PwaPrompt using button', async () => {
+    const user = userEvent.setup();
+
+    render(<PwaPrompt />);
+
+    // Wait for the delay to pass
+    await waitFor(
+      () => {
+        expect(screen.getByTestId('prompt-overlay')).toBeVisible();
+      },
+      { timeout: 3000 }
+    );
+
+    // Dismiss the prompt
+    await user.click(screen.getByTestId('prompt-dismiss-button'));
 
     expect(screen.queryByTestId('prompt-overlay')).not.toBeInTheDocument();
     expect(screen.queryByTestId('prompt-wrapper')).not.toBeInTheDocument();
