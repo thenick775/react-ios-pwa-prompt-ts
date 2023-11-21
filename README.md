@@ -1,4 +1,4 @@
-# React-iOS-PWA-prompt
+# react-ios-pwa-prompt-ts
 
 Lovingly forked from [react-ios-pwa-prompt](https://github.com/chrisdancee/react-ios-pwa-prompt), rewritten using vite, styled components, and typescript.
 
