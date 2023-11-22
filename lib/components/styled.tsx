@@ -142,9 +142,10 @@ export const PromptShareIcon = styled(IoShareOutline).attrs({
   viewBox: '55 0 512 512',
 })`
   color: rgba(0, 85, 179, 1);
-  height: 45px;
-  margin-right: 17px;
-  width: 55px;
+  height: 44px;
+  margin-right: 15px;
+  width: 44px;
+  flex-shrink: 0;
 
   @media (prefers-color-scheme: dark) {
     & {
@@ -158,6 +159,7 @@ export const PromptAddToHomeIcon = styled(FaRegSquarePlus)`
   height: 34px;
   margin-right: 25px;
   width: 34px;
+  flex-shrink: 0;
 
   @media (prefers-color-scheme: dark) {
     & {
