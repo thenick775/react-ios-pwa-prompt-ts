@@ -26,18 +26,22 @@ A React component that provides a customisable Progressive Web App (PWA) prompt 
 
 ## Usage
 
-1. Add `react-ios-pwa-prompt` as a dependency using `yarn add react-ios-pwa-prompt`.
+1. Add `react-ios-pwa-prompt-ts` as a dependency using:
+
+```
+npm i react-ios-pwa-prompt-ts
+```
 
 2. Import into your project:
 
 ```
-import { PWAPrompt } from 'react-ios-pwa-prompt'
+import { PwaPrompt } from 'react-ios-pwa-prompt-ts'
 ```
 
 3. Render the component:
 
 ```
-<PWAPrompt />
+<PwaPrompt />
 ```
 
 4. Add optional props to configure:
