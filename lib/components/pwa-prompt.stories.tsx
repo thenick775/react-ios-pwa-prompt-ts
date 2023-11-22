@@ -2,17 +2,40 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { PwaPrompt } from './pwa-prompt.tsx';
 
+import {
+  Title,
+  Subtitle,
+  Description,
+  Controls,
+  Source,
+} from '@storybook/blocks';
+
 const meta: Meta<typeof PwaPrompt> = {
   component: PwaPrompt,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description of={Primary} />
+          <Source />
+          <Controls />
+        </>
+      ),
+    },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof PwaPrompt>;
 
-/*
- *👇 Render functions are a framework specific feature to allow you control on how the component renders.
- * See https://storybook.js.org/docs/react/api/csf
- * to learn how to use render functions.
+/**
+ * Here you can interact with the PwaPrompt as it will appear in your application
+ *
+ * Remember to select the correct user agent using the tools above the story.
+ *
+ * If you are not seeing the prompt component, either raise the timesToShow, or clear your localstorage.
  */
 export const Primary: Story = {
   render: (props) => <PwaPrompt {...props} />,
@@ -25,9 +48,12 @@ export const Primary: Story = {
     copyTitle: 'Add to Home Screen',
     debug: false,
     delay: 1000,
-    onClose: undefined,
+    onClose: () => {
+      alert('firing onClose callback');
+    },
     permanentlyHideOnDismiss: true,
     promptOnVisit: 1,
     timesToShow: 1,
   },
+  tags: ['autodocs'],
 };
