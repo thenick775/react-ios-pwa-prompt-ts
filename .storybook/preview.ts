@@ -11,6 +11,11 @@ const preview: Preview = {
       },
     },
     userAgent: customUserAgents,
+    options: {
+      storySort: {
+        order: ['components', ['pwa-prompt', 'prompt']],
+      },
+    },
   },
 };
 

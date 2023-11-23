@@ -9,11 +9,6 @@ const meta: Meta<typeof Prompt> = {
 export default meta;
 type Story = StoryObj<typeof Prompt>;
 
-/*
- *👇 Render functions are a framework specific feature to allow you control on how the component renders.
- * See https://storybook.js.org/docs/react/api/csf
- * to learn how to use render functions.
- */
 export const Primary: Story = {
   render: (props) => <Prompt {...props} />,
   args: {
@@ -24,6 +19,5 @@ export const Primary: Story = {
     copyShareButtonLabel: "1) Press the 'Share' button on the menu bar below.",
     copyTitle: 'Add to Home Screen',
     delay: 1000,
-    onDismiss: undefined,
   },
 };
