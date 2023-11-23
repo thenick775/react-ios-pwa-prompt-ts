@@ -1,9 +1,4 @@
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  type MouseEvent,
-} from 'react';
+import { useCallback, useLayoutEffect, type MouseEvent } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 import { useDeviceSelectors } from 'react-device-detect';
 
@@ -55,7 +50,6 @@ export const PwaPrompt = ({
   onClose = undefined,
 }: PwaPromptProps) => {
   const [{ isIOS, isIPad13 }] = useDeviceSelectors(window.navigator.userAgent);
-
   const [iosPwaPrompt, setIosPwaPrompt] = useLocalStorage<PwaPromptData>(
     PwaPromptDataKey,
     {
@@ -64,18 +58,11 @@ export const PwaPrompt = ({
     }
   );
 
-  useEffect(() => {
-    if (iosPwaPrompt.isiOS)
-      setIosPwaPrompt((prevState) => ({
-        ...prevState,
-        visits: prevState.visits + 1,
-      }));
-  }, [setIosPwaPrompt, iosPwaPrompt.isiOS]);
-
   useLayoutEffect(() => {
+    const isiOS = deviceCheck(isIOS, isIPad13, window.navigator);
     setIosPwaPrompt((prevState) => ({
-      ...prevState,
-      isiOS: deviceCheck(isIOS, isIPad13, window.navigator),
+      isiOS,
+      visits: isiOS ? prevState.visits + 1 : prevState.visits,
     }));
   }, [setIosPwaPrompt, isIOS, isIPad13]);
 
