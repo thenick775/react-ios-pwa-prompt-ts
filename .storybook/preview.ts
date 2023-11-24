@@ -16,6 +16,9 @@ const preview: Preview = {
         order: ['components', ['pwa-prompt', 'prompt']],
       },
     },
+    viewport: {
+      defaultViewport: 'mobile1',
+    },
   },
 };
 
