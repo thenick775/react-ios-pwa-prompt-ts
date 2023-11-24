@@ -1,4 +1,4 @@
-import { useState, useId, type MouseEvent } from 'react';
+import { useState, useId, type TransitionEvent } from 'react';
 
 import { useInterval, useLockedBody } from 'usehooks-ts';
 import {
@@ -23,16 +23,18 @@ type PromptProps = {
   copyAddHomeButtonLabel: string;
   copyShareButtonLabel: string;
   copyClosePrompt: string;
-  onDismiss?: (e: MouseEvent) => void;
+  className?: string;
+  onDismiss?: (e: TransitionEvent) => void;
 };
 
 export const Prompt = ({
-  delay,
-  copyTitle,
-  copyBody,
+  className,
   copyAddHomeButtonLabel,
-  copyShareButtonLabel,
+  copyBody,
   copyClosePrompt,
+  copyShareButtonLabel,
+  copyTitle,
+  delay,
   onDismiss,
 }: PromptProps) => {
   const [isVisible, setVisibility] = useState(!delay);
@@ -43,10 +45,8 @@ export const Prompt = ({
 
   useInterval(() => setVisibility(true), delay && !isVisible ? delay : null);
 
-  const dismissPrompt = (e: MouseEvent) => {
+  const dismissPrompt = () => {
     setVisibility(false);
-
-    if (onDismiss) onDismiss(e);
   };
 
   return (
@@ -59,11 +59,15 @@ export const Prompt = ({
         $isVisible={isVisible}
       />
       <PromptWrapper
+        className={className}
         data-testid="prompt-wrapper"
         aria-describedby={promptDescriptionId}
         aria-labelledby={promptTitleId}
         role="dialog"
         $isVisible={isVisible}
+        onTransitionEnd={(e) => {
+          if (onDismiss && !isVisible) onDismiss(e);
+        }}
       >
         <PromptHeader>
           <PromptTitle id={promptTitleId}>{copyTitle}</PromptTitle>

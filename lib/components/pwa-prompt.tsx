@@ -1,21 +1,23 @@
-import { useCallback, useLayoutEffect, type MouseEvent } from 'react';
+import { useCallback, useLayoutEffect, type TransitionEvent } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 import { useDeviceSelectors } from 'react-device-detect';
 
 import { Prompt } from './prompt.tsx';
 
 type PwaPromptProps = {
-  timesToShow?: number;
-  promptOnVisit?: number;
-  permanentlyHideOnDismiss?: boolean;
-  copyTitle?: string;
-  copyBody?: string;
-  copyShareButtonLabel?: string;
+  className?: string;
   copyAddHomeButtonLabel?: string;
+  copyBody?: string;
   copyClosePrompt?: string;
-  delay?: number;
+  copyShareButtonLabel?: string;
+  copyTitle?: string;
   debug?: boolean;
-  onClose?: (e: MouseEvent) => void;
+  delay?: number;
+  onClose?: (e: TransitionEvent) => void;
+  permanentlyHideOnDismiss?: boolean;
+  promptLocalStorageKey?: string;
+  promptOnVisit?: number;
+  timesToShow?: number;
 };
 
 export type PwaPromptData = {
@@ -34,24 +36,24 @@ const deviceCheck = (
   return (isIOS || isIPad13) && !isStandalone;
 };
 
-export const PwaPromptDataKey = 'iosPwaPrompt';
-
 export const PwaPrompt = ({
-  timesToShow = 1,
-  promptOnVisit = 1,
-  permanentlyHideOnDismiss = true,
-  copyTitle = 'Add to Home Screen',
-  copyBody = 'This website has app functionality. Add it to your home screen to use it in fullscreen and while offline.',
-  copyShareButtonLabel = "1) Press the 'Share' button on the menu bar below.",
+  className,
   copyAddHomeButtonLabel = "2) Press 'Add to Home Screen'.",
+  copyBody = 'This website has app functionality. Add it to your home screen to use it in fullscreen and while offline.',
   copyClosePrompt = 'Cancel',
-  delay = 1000,
+  copyShareButtonLabel = "1) Press the 'Share' button on the menu bar below.",
+  copyTitle = 'Add to Home Screen',
   debug = false,
+  delay = 1000,
   onClose = undefined,
+  permanentlyHideOnDismiss = true,
+  promptLocalStorageKey = 'iosPwaPrompt',
+  promptOnVisit = 1,
+  timesToShow = 1,
 }: PwaPromptProps) => {
   const [{ isIOS, isIPad13 }] = useDeviceSelectors(window.navigator.userAgent);
   const [iosPwaPrompt, setIosPwaPrompt] = useLocalStorage<PwaPromptData>(
-    PwaPromptDataKey,
+    promptLocalStorageKey,
     {
       isiOS: deviceCheck(isIOS, isIPad13, window.navigator),
       visits: 0,
@@ -67,7 +69,7 @@ export const PwaPrompt = ({
   }, [setIosPwaPrompt, isIOS, isIPad13]);
 
   const onDismiss = useCallback(
-    (e: MouseEvent) => {
+    (e: TransitionEvent) => {
       if (permanentlyHideOnDismiss)
         setIosPwaPrompt((prevState) => ({
           ...prevState,
@@ -94,6 +96,7 @@ export const PwaPrompt = ({
 
   return (
     <Prompt
+      className={className}
       delay={delay}
       copyTitle={copyTitle}
       copyBody={copyBody}

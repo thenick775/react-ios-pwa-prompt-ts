@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import { userEvent } from '@testing-library/user-event';
 
@@ -73,6 +73,9 @@ describe('<Prompt />', () => {
     // Dismiss the prompt
     await user.click(screen.getByTestId('prompt-overlay'));
 
+    // transition end is not fired normally, we need to simulate a transition to call the callback func
+    fireEvent.transitionEnd(screen.getByTestId('prompt-wrapper'));
+
     // Check if the onDismiss callback was called
     expect(onDismissMock).toHaveBeenCalledTimes(1);
   });
@@ -88,6 +91,9 @@ describe('<Prompt />', () => {
 
     // Dismiss the prompt
     await user.click(screen.getByTestId('prompt-dismiss-button'));
+
+    // transition end is not fired normally, we need to simulate a transition to call the callback func
+    fireEvent.transitionEnd(screen.getByTestId('prompt-wrapper'));
 
     // Check if the onDismiss callback was called
     expect(onDismissMock).toHaveBeenCalledTimes(1);
