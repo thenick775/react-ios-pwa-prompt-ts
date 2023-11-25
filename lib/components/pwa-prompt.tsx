@@ -55,11 +55,12 @@ export const PwaPrompt = ({
   const [iosPwaPrompt, setIosPwaPrompt] = useLocalStorage<PwaPromptData>(
     promptLocalStorageKey,
     {
-      isiOS: deviceCheck(isIOS, isIPad13, window.navigator),
+      isiOS: false,
       visits: 0,
     }
   );
 
+  // runs once on mount, determines if iOS/iPadOS and increments visit counter
   useLayoutEffect(() => {
     const isiOS = deviceCheck(isIOS, isIPad13, window.navigator);
     setIosPwaPrompt((prevState) => ({
