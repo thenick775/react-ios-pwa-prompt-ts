@@ -5,6 +5,7 @@ export {
   type PwaPromptData,
 } from './components/pwa-prompt.tsx';
 // sub components for customization
+export { Prompt } from './components/prompt.tsx';
 export {
   PromptAddToHomeIcon,
   PromptBody,

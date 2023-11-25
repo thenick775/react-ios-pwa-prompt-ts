@@ -21,8 +21,8 @@ A React component that provides a customisable Progressive Web App (PWA) prompt 
 - 🛠 Fully configurable, set how many times you want to see it, and after how many page visits.
 - 📃 PWA available offline? In full screen mode? Customise the content of your prompts message through props.
 - ⚡️ Efficient. Very little overhead for non-iOS devices and does as little work as needed for each page load.
-- 📱 Detects user's iOS version to provide the correct icon set.
-- 🌕 Will display a dark mode if enabled on iOS 13 and 14.
+- 🌕 Will display in dark mode if enabled on iOS 13 and 14.
+- Supports `styled-components`
 
 ## Usage
 
@@ -58,6 +58,6 @@ import { PwaPrompt } from 'react-ios-pwa-prompt-ts'
 - `permanentlyHideOnDismiss`: pass a boolean to configure whether to never show the prompt again once dismissed. Defaults to `true` (hide forever).
 - `debug`: pass a boolean to put the prompt into debug mode, showing it on any device at all times. Defaults to `false` (production-mode).
 
-```
-<PWAPrompt promptOnVisit={1} timesToShow={3} copyClosePrompt="Close" permanentlyHideOnDismiss={false}/>
-```
+## Contributing
+
+Feel free to open discussions, issues, and pull requests. Contributions are welcome!

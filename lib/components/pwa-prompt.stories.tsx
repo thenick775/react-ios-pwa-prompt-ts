@@ -11,6 +11,8 @@ import { ComponentProps } from 'react';
 
 import { PwaPrompt } from './pwa-prompt.tsx';
 
+import { linkTo } from '@storybook/addon-links';
+
 type PwaPromptPropsAndCustomArgs = ComponentProps<typeof PwaPrompt> & {
   useragent?: string;
 };
@@ -26,6 +28,20 @@ const meta: Meta<PwaPromptPropsAndCustomArgs> = {
           <Description of={Primary} />
           <button onClick={() => window.localStorage.clear()}>
             Clear localStorage
+          </button>
+          <p>
+            Use the button below to view the pwa-prompt as it will appear in
+            your application in a mobile viewport:
+          </p>
+          <button onClick={linkTo('components/pwa-prompt', 'primary')}>
+            Go to pwa-prompt mobile view
+          </button>
+          <p>
+            Use the button below to view the prompt component in a mobile
+            viewport with no localstorage or conditional rendering:
+          </p>
+          <button onClick={linkTo('components/prompt')}>
+            Go to prompt mobile view
           </button>
           <Story inline />
           <Source />
@@ -48,7 +64,7 @@ type Story = StoryObj<PwaPromptPropsAndCustomArgs>;
  *
  * You can change the user agent using the tools above the story. By default, it will be set to a mobile iOS user agent.
  *
- * If you are not seeing the prompt component, either raise the timesToShow, or clear your localstorage.
+ * If you are not seeing the prompt component, either raise the timesToShow, clear your localstorage, or re-mount the component.
  */
 export const Primary: Story = {
   render: (props) => <PwaPrompt {...props} />,
