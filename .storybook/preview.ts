@@ -19,6 +19,7 @@ const preview: Preview = {
     viewport: {
       defaultViewport: 'mobile1',
     },
+    backgrounds: { default: 'dark' },
   },
 };
 

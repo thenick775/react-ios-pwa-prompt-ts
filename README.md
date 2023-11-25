@@ -6,15 +6,9 @@ Forked with care from [react-ios-pwa-prompt](https://github.com/chrisdancee/reac
 
 > Enhancing PWAs for iOS
 
-[Check out the demo!](https://react-ios-pwa-prompt.vercel.app//)
-
 A React component that provides a customisable Progressive Web App (PWA) prompt telling the user to 'Add to Home Screen'. The prompt behaviour is baked in to Android devices, yet iOS is still lagging behind. This component aims to provide a simple way to provide this functionality on iOS for websites that are PWA-ready. The prompt styles closely match iOS designs for both light and dark UI modes to appear native to the user.
 
-<hr>
-
-<img src="https://user-images.githubusercontent.com/11626619/65389000-18352d00-dd49-11e9-82c8-6fac25a494c8.gif" width="33%">
-
-<hr>
+![react-ios-pwa-prompt-ts storybook](./readme-graphics/react-ios-pwa-prompt-ts.gif)
 
 ## Features
 
@@ -29,7 +23,7 @@ A React component that provides a customisable Progressive Web App (PWA) prompt 
 1. Add `react-ios-pwa-prompt-ts` as a dependency:
 
 ```
-npm i react-ios-pwa-prompt-ts
+npm install react-ios-pwa-prompt-ts
 ```
 
 2. Import into your project:
