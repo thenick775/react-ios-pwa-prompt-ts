@@ -24,6 +24,9 @@ const meta: Meta<PwaPromptPropsAndCustomArgs> = {
           <Title />
           <Subtitle />
           <Description of={Primary} />
+          <button onClick={() => window.localStorage.clear()}>
+            Clear localStorage
+          </button>
           <Story inline />
           <Source />
           <Controls />
@@ -41,9 +44,9 @@ export default meta;
 type Story = StoryObj<PwaPromptPropsAndCustomArgs>;
 
 /**
- * Here you can interact with the PwaPrompt as it will appear in your application
+ * Here you can interact with the PwaPrompt as it will appear in your application.
  *
- * Remember to select the correct user agent using the tools above the story.
+ * You can change the user agent using the tools above the story. By default, it will be set to a mobile iOS user agent.
  *
  * If you are not seeing the prompt component, either raise the timesToShow, or clear your localstorage.
  */
