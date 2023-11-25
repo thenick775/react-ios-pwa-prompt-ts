@@ -1,4 +1,9 @@
-import { useCallback, useLayoutEffect, type TransitionEvent } from 'react';
+import {
+  useCallback,
+  useLayoutEffect,
+  useState,
+  type TransitionEvent,
+} from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 import { useDeviceSelectors } from 'react-device-detect';
 
@@ -53,6 +58,7 @@ export const PwaPrompt = ({
   promptOnVisit = 1,
   timesToShow = 1,
 }: PwaPromptProps) => {
+  const [isDismissed, setIsDismissed] = useState(false);
   const [{ isIOS, isIPad13 }] = useDeviceSelectors(window.navigator.userAgent);
   const [iosPwaPrompt, setIosPwaPrompt] = useLocalStorage<PwaPromptData>(
     promptLocalStorageKey,
@@ -76,8 +82,10 @@ export const PwaPrompt = ({
       if (permanentlyHideOnDismiss)
         setIosPwaPrompt((prevState) => ({
           ...prevState,
-          visits: timesToShow + promptOnVisit,
+          visits: promptOnVisit + timesToShow,
         }));
+
+      setIsDismissed(true);
 
       if (onClose) onClose(e);
     },
@@ -93,7 +101,13 @@ export const PwaPrompt = ({
   const aboveMinVisits = iosPwaPrompt.visits >= promptOnVisit;
   const belowMaxVisits = iosPwaPrompt.visits < promptOnVisit + timesToShow;
 
-  if ((!iosPwaPrompt.isiOS || !aboveMinVisits || !belowMaxVisits) && !debug) {
+  if (
+    (!iosPwaPrompt.isiOS ||
+      !aboveMinVisits ||
+      !belowMaxVisits ||
+      isDismissed) &&
+    !debug
+  ) {
     return null;
   }
 

@@ -1,6 +1,6 @@
 import { useState, useId, type TransitionEvent } from 'react';
-
 import { useInterval, useLockedBody } from 'usehooks-ts';
+
 import {
   PromptOverlay,
   PromptBody,
