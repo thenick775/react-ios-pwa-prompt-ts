@@ -2,6 +2,25 @@
   "name": "react-ios-pwa-prompt-ts",
   "version": "1.0.0",
   "type": "module",
+  "author": {
+    "name": "Nicholas VanCise",
+    "url": "https://nicholas-vancise.dev"
+  },
+  "description": "A native styled 'Add to Home Screen' React component for PWAs on iOS written with typescript, vite, and storybook",
+  "homepage": "https://github.com/thenick775/react-ios-pwa-prompt-ts",
+  "keywords": [
+    "react",
+    "ios",
+    "typescript",
+    "pwa",
+    "add-to-homescreen",
+    "vite"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thenick775/react-ios-pwa-prompt-ts.git"
+  },
   "main": "./dist/react-ios-pwa-prompt-ts.umd.cjs",
   "module": "./dist/react-ios-pwa-prompt-ts.js",
   "exports": {
