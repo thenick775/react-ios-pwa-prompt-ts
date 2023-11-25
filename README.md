@@ -1,10 +1,10 @@
 # react-ios-pwa-prompt-ts
 
-Lovingly forked from [react-ios-pwa-prompt](https://github.com/chrisdancee/react-ios-pwa-prompt), rewritten using vite, styled components, and typescript.
+Forked with care from [react-ios-pwa-prompt](https://github.com/chrisdancee/react-ios-pwa-prompt), this package is revamped using Vite, Styled Components, and TypeScript.
 
 ## Summary
 
-> Polyfilling PWAs for iOS
+> Enhancing PWAs for iOS
 
 [Check out the demo!](https://react-ios-pwa-prompt.vercel.app//)
 
@@ -18,15 +18,15 @@ A React component that provides a customisable Progressive Web App (PWA) prompt 
 
 ## Features
 
-- 🛠 Fully configurable, set how many times you want to see it, and after how many page visits.
-- 📃 PWA available offline? In full screen mode? Customise the content of your prompts message through props.
-- ⚡️ Efficient. Very little overhead for non-iOS devices and does as little work as needed for each page load.
-- 🌕 Will display in dark mode if enabled on iOS 13 and 14.
-- Supports `styled-components`
+- 🛠 Fully configurable: Set the frequency and conditions for displaying the prompt.
+- 📃 Customize prompt content based on PWA availability and full-screen mode.
+- ⚡️ Efficient: Minimal overhead for non-iOS devices, optimizing each page load.
+- 🌕 Dark mode support: Adapts to iOS 13 and 14 settings.
+- 🎨 Supports custom styling with `styled-components`
 
 ## Usage
 
-1. Add `react-ios-pwa-prompt-ts` as a dependency using:
+1. Add `react-ios-pwa-prompt-ts` as a dependency:
 
 ```
 npm i react-ios-pwa-prompt-ts
@@ -44,19 +44,41 @@ import { PwaPrompt } from 'react-ios-pwa-prompt-ts'
 <PwaPrompt />
 ```
 
-4. Add optional props to configure:
+4. Optional configuration props:
 
-- `timesToShow`: pass an integer to configure how many times to show the prompt. Defaults to `1`.
-- `promptOnVisit`: pass an integer for the when to start showing the prompt. Defaults to `1` (the first page visit).
+- `className`: Add a custom class name to the prompt component, for use with `styled-components`.
+- `copyAddHomeButtonLabel`: pass a string to customise label of add to home instruction. Defaults to `2) Press 'Add to Home Screen'`.
+- `copyBody`: pass a string to customise the body of the prompt. Defaults to `This website has app functionality. Add it to your home screen to use it in fullscreen and while offline.`.
+- `copyClosePrompt`: pass a string to customise label of close button. Defaults to `Cancel`.
+- `copyShareButtonLabel`: pass a string to customise label of share button. Defaults to `1) Press the 'Share' button`.
+- `copyTitle`: pass a string to customise the title of the prompt. Defaults to `Add to Home Screen`.
+- `debug`: pass a boolean to put the prompt into debug mode, showing it on any device at all times. Defaults to `false` (production-mode).
 - `delay`: pass an integer in ms to add a delay to the prompt. Defaults to `1000`.
 - `onClose`: pass a function to call upon closing the prompt. Passes the event object as the function argument. Defaults to a noop.
-- `copyTitle`: pass a string to customise the title of the prompt. Defaults to `Add to Home Screen`.
-- `copyBody`: pass a string to customise the body of the prompt. Defaults to `This website has app functionality. Add it to your home screen to use it in fullscreen and while offline.`.
-- `copyShareButtonLabel`: pass a string to customise label of share button. Defaults to `1) Press the 'Share' button`.
-- `copyAddHomeButtonLabel`: pass a string to customise label of add to home instruction. Defaults to `2) Press 'Add to Home Screen'`.
-- `copyClosePrompt`: pass a string to customise label of close button. Defaults to `Cancel`.
 - `permanentlyHideOnDismiss`: pass a boolean to configure whether to never show the prompt again once dismissed. Defaults to `true` (hide forever).
-- `debug`: pass a boolean to put the prompt into debug mode, showing it on any device at all times. Defaults to `false` (production-mode).
+- `promptLocalStorageKey`: Provide a custom key for storing prompt data in local storage. Defaults to `iosPwaPrompt`.
+- `promptOnVisit`: pass an integer for the when to start showing the prompt. Defaults to `1` (the first page visit).
+- `timesToShow`: pass an integer to configure how many times to show the prompt. Defaults to `1`.
+
+## Storybook
+
+Storybook is a development environment for UI components. Follow the steps below to run the Storybook demo for this project:
+
+1. Clone this repository to your machine, and install project dependencies by running the following command in your project directory:
+
+```
+npm install
+```
+
+2. Once the installation is complete, run the following command to start Storybook:
+
+```
+npm run storybook
+```
+
+3. Open your web browser and go to http://localhost:6006 to view the interactive Storybook demo.
+
+Feel free to make changes to the components and see the live updates in Storybook, making it a valuable tool for developing and testing your UI components.
 
 ## Contributing
 
