@@ -36,6 +36,8 @@ const deviceCheck = (
   return (isIOS || isIPad13) && !isStandalone;
 };
 
+export const PromptLocalStorageKey = 'iosPwaPrompt';
+
 export const PwaPrompt = ({
   className,
   copyAddHomeButtonLabel = "2) Press 'Add to Home Screen'.",
@@ -47,7 +49,7 @@ export const PwaPrompt = ({
   delay = 1000,
   onClose = undefined,
   permanentlyHideOnDismiss = true,
-  promptLocalStorageKey = 'iosPwaPrompt',
+  promptLocalStorageKey = PromptLocalStorageKey,
   promptOnVisit = 1,
   timesToShow = 1,
 }: PwaPromptProps) => {

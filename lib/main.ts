@@ -1,5 +1,9 @@
 // main component and data types
-export { PwaPrompt, type PwaPromptData } from './components/pwa-prompt.tsx';
+export {
+  PwaPrompt,
+  PromptLocalStorageKey,
+  type PwaPromptData,
+} from './components/pwa-prompt.tsx';
 // sub components for customization
 export {
   PromptAddToHomeIcon,
