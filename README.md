@@ -74,7 +74,7 @@ npm run storybook
 
 3. Open your web browser and go to http://localhost:6006 to view the interactive Storybook demo.
 
-Feel free to make changes to the components and see the live updates in Storybook, making it a valuable tool for developing and testing your UI components.
+You can now explore stories, make changes to the components, and see the live updates in Storybook!
 
 ## Contributing
 
