@@ -1,8 +1,9 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vite';
+import { defineConfig, type PluginOption } from 'vite';
 import { configDefaults } from 'vitest/config';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
   build: {
@@ -35,6 +36,12 @@ export default defineConfig({
         content,
       }),
     }),
+    // Note: storybook plugin react has a conflicting vite peer dependency,
+    // this functionality still works, but have to cast to get around type warnings
+    visualizer({
+      gzipSize: true,
+      filename: 'index.html',
+    }) as unknown as PluginOption,
   ],
   test: {
     globals: true,

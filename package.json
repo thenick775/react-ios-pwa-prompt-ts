@@ -41,6 +41,7 @@
     "coverage": "vitest run --coverage",
     "build-watch": "tsc && vite build --watch",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "stats": "npm run build && vite",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -72,6 +73,7 @@
     "jsdom": "^23.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "rollup-plugin-visualizer": "^5.9.3",
     "storybook": "^7.5.3",
     "storybook-addon-useragent": "^7.0.0",
     "styled-components": "^6.1.1",
