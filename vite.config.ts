@@ -1,5 +1,6 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite';
+import { configDefaults } from 'vitest/config';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
 
@@ -40,5 +41,13 @@ export default defineConfig({
     clearMocks: true,
     environment: 'jsdom',
     setupFiles: './lib/test/setup.ts',
+    coverage: {
+      provider: 'v8',
+      exclude: [
+        ...configDefaults.coverage.exclude,
+        '**/*stories.tsx',
+        '**/main.ts',
+      ],
+    },
   },
 });
