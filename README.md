@@ -28,6 +28,12 @@ A React component that provides a customisable Progressive Web App (PWA) prompt 
 npm install react-ios-pwa-prompt-ts
 ```
 
+2. Add peer dependencies if not already included in your application:
+
+```
+npm i react styled-components
+```
+
 2. Import into your project:
 
 ```
