@@ -38,6 +38,7 @@ export default defineConfig({
     }),
     // Note: storybook plugin react has a conflicting vite peer dependency,
     // this functionality still works, but have to cast to get around type warnings
+    // see: https://github.com/storybookjs/storybook/issues/25127
     visualizer({
       gzipSize: true,
       filename: 'index.html',
