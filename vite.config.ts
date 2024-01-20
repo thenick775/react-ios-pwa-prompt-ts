@@ -1,5 +1,5 @@
 /// <reference types="vitest" />
-import { defineConfig, type PluginOption } from 'vite';
+import { defineConfig } from 'vite';
 import { configDefaults } from 'vitest/config';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
