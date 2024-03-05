@@ -16,13 +16,14 @@ type PwaPromptProps = {
   copyClosePrompt?: string;
   copyShareButtonLabel?: string;
   copyTitle?: string;
-  debug?: boolean;
+  isOpen?: boolean;
   delay?: number;
   onClose?: (e: TransitionEvent) => void;
   permanentlyHideOnDismiss?: boolean;
   promptLocalStorageKey?: string;
   promptOnVisit?: number;
   timesToShow?: number;
+  transitionDuration?: number;
 };
 
 export type PwaPromptData = {
@@ -50,13 +51,14 @@ export const PwaPrompt = ({
   copyClosePrompt = 'Cancel',
   copyShareButtonLabel = "1) Press the 'Share' button on the menu bar below.",
   copyTitle = 'Add to Home Screen',
-  debug = false,
+  isOpen = false,
   delay = 1000,
   onClose = undefined,
   permanentlyHideOnDismiss = true,
   promptLocalStorageKey = PromptLocalStorageKey,
   promptOnVisit = 1,
   timesToShow = 1,
+  transitionDuration = 400,
 }: PwaPromptProps) => {
   const [isDismissed, setIsDismissed] = useState(false);
   const [{ isIOS, isIPad13 }] = useDeviceSelectors(window.navigator.userAgent);
@@ -77,7 +79,7 @@ export const PwaPrompt = ({
     }));
   }, [setIosPwaPrompt, isIOS, isIPad13]);
 
-  const onDismiss = useCallback(
+  const onAfterDismiss = useCallback(
     (e: TransitionEvent) => {
       if (permanentlyHideOnDismiss)
         setIosPwaPrompt((prevState) => ({
@@ -106,7 +108,7 @@ export const PwaPrompt = ({
       !aboveMinVisits ||
       !belowMaxVisits ||
       isDismissed) &&
-    !debug
+    !isOpen
   ) {
     return null;
   }
@@ -120,7 +122,8 @@ export const PwaPrompt = ({
       copyAddHomeButtonLabel={copyAddHomeButtonLabel}
       copyShareButtonLabel={copyShareButtonLabel}
       copyClosePrompt={copyClosePrompt}
-      onDismiss={onDismiss}
+      onAfterDismiss={onAfterDismiss}
+      transitionDuration={transitionDuration}
     />
   );
 };

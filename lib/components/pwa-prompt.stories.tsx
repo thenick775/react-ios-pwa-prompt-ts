@@ -7,7 +7,7 @@ import {
   Story,
 } from '@storybook/blocks';
 import type { Meta, StoryObj } from '@storybook/react';
-import { ComponentProps } from 'react';
+import { ComponentProps, useState } from 'react';
 
 import { PwaPrompt } from './pwa-prompt.tsx';
 
@@ -75,12 +75,50 @@ export const Primary: Story = {
     copyClosePrompt: 'Cancel',
     copyShareButtonLabel: "1) Press the 'Share' button on the menu bar below.",
     copyTitle: 'Add to Home Screen',
-    debug: false,
+    isOpen: false,
     delay: 1000,
     permanentlyHideOnDismiss: true,
     promptLocalStorageKey: 'iosPwaPrompt',
     promptOnVisit: 1,
     timesToShow: 1,
+    transitionDuration: 400,
   },
   tags: ['autodocs'],
+};
+
+export const Controlled: Story = {
+  render: (props) => {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+      <>
+        <button
+          onClick={() => {
+            setIsOpen((prevState) => !prevState);
+          }}
+        >
+          Open Prompt
+        </button>
+        <PwaPrompt
+          {...props}
+          isOpen={isOpen}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+        />
+      </>
+    );
+  },
+  args: {
+    copyAddHomeButtonLabel: "2) Press 'Add to Home Screen'.",
+    copyBody:
+      'This website has app functionality. Add it to your home screen to use it in fullscreen and while offline.',
+    copyClosePrompt: 'Cancel',
+    copyShareButtonLabel: "1) Press the 'Share' button on the menu bar below.",
+    copyTitle: 'Add to Home Screen',
+    delay: 1000,
+    permanentlyHideOnDismiss: true,
+    promptLocalStorageKey: 'iosPwaPrompt-controlled',
+    promptOnVisit: 1,
+    timesToShow: 1,
+  },
 };

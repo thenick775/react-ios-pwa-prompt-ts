@@ -1,5 +1,5 @@
 import { useState, useId, type TransitionEvent } from 'react';
-import { useInterval, useLockedBody } from 'usehooks-ts';
+import { useInterval, useScrollLock } from 'usehooks-ts';
 
 import {
   PromptOverlay,
@@ -24,7 +24,8 @@ type PromptProps = {
   copyShareButtonLabel: string;
   copyClosePrompt: string;
   className?: string;
-  onDismiss?: (e: TransitionEvent) => void;
+  onAfterDismiss?: (e: TransitionEvent) => void;
+  transitionDuration?: number;
 };
 
 export const Prompt = ({
@@ -35,13 +36,14 @@ export const Prompt = ({
   copyShareButtonLabel,
   copyTitle,
   delay,
-  onDismiss,
+  onAfterDismiss,
+  transitionDuration,
 }: PromptProps) => {
   const [isVisible, setVisibility] = useState(!delay);
   const promptDescriptionId = useId();
   const promptTitleId = useId();
 
-  useLockedBody(isVisible, 'root');
+  useScrollLock();
 
   useInterval(() => setVisibility(true), delay && !isVisible ? delay : null);
 
@@ -57,6 +59,7 @@ export const Prompt = ({
         role="button"
         onClick={dismissPrompt}
         $isVisible={isVisible}
+        transitionDuration={transitionDuration}
       />
       <PromptWrapper
         className={className}
@@ -66,8 +69,9 @@ export const Prompt = ({
         role="dialog"
         $isVisible={isVisible}
         onTransitionEnd={(e) => {
-          if (onDismiss && !isVisible) onDismiss(e);
+          if (onAfterDismiss && !isVisible) onAfterDismiss(e);
         }}
+        transitionDuration={transitionDuration}
       >
         <PromptHeader>
           <PromptTitle id={promptTitleId}>{copyTitle}</PromptTitle>
