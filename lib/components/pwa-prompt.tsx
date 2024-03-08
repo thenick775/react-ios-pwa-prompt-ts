@@ -1,13 +1,11 @@
-import {
-  useCallback,
-  useLayoutEffect,
-  useState,
-  type TransitionEvent,
-} from 'react';
-import { useLocalStorage } from 'usehooks-ts';
-import { useDeviceSelectors } from 'react-device-detect';
+import { useCallback, useState, type TransitionEvent } from 'react';
 
 import { Prompt } from './prompt.tsx';
+import {
+  usePromptStorage,
+  useUpdatePromptStorage,
+} from '../hooks/use-should-show-prompt.tsx';
+import { useShouldShowPrompt } from '../main.ts';
 
 type PwaPromptProps = {
   className?: string;
@@ -31,17 +29,6 @@ export type PwaPromptData = {
   visits: number;
 };
 
-const deviceCheck = (
-  isIOS: boolean,
-  isIPad13: boolean,
-  navigator: Navigator
-) => {
-  const isStandalone =
-    !!navigator && 'standalone' in navigator && navigator.standalone;
-
-  return (isIOS || isIPad13) && !isStandalone;
-};
-
 export const PromptLocalStorageKey = 'iosPwaPrompt';
 
 export const PwaPrompt = ({
@@ -60,24 +47,16 @@ export const PwaPrompt = ({
   timesToShow = 1,
   transitionDuration = 400,
 }: PwaPromptProps) => {
+  const [, setIosPwaPrompt] = usePromptStorage(promptLocalStorageKey);
   const [isDismissed, setIsDismissed] = useState(false);
-  const [{ isIOS, isIPad13 }] = useDeviceSelectors(window.navigator.userAgent);
-  const [iosPwaPrompt, setIosPwaPrompt] = useLocalStorage<PwaPromptData>(
-    promptLocalStorageKey,
-    {
-      isiOS: false,
-      visits: 0,
-    }
-  );
 
-  // runs once on mount, determines if iOS/iPadOS and increments visit counter
-  useLayoutEffect(() => {
-    const isiOS = deviceCheck(isIOS, isIPad13, window.navigator);
-    setIosPwaPrompt((prevState) => ({
-      isiOS,
-      visits: isiOS ? prevState.visits + 1 : prevState.visits,
-    }));
-  }, [setIosPwaPrompt, isIOS, isIPad13]);
+  const { shouldShowPrompt } = useShouldShowPrompt({
+    promptLocalStorageKey,
+    promptOnVisit,
+    timesToShow,
+  });
+
+  useUpdatePromptStorage(promptLocalStorageKey);
 
   const onAfterDismiss = useCallback(
     (e: TransitionEvent) => {
@@ -100,16 +79,7 @@ export const PwaPrompt = ({
     ]
   );
 
-  const aboveMinVisits = iosPwaPrompt.visits >= promptOnVisit;
-  const belowMaxVisits = iosPwaPrompt.visits < promptOnVisit + timesToShow;
-
-  if (
-    (!iosPwaPrompt.isiOS ||
-      !aboveMinVisits ||
-      !belowMaxVisits ||
-      isDismissed) &&
-    !isOpen
-  ) {
+  if ((!shouldShowPrompt || isDismissed) && !isOpen) {
     return null;
   }
 

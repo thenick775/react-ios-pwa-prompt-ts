@@ -20,3 +20,9 @@ export {
   PromptTitle,
   PromptWrapper,
 } from './components/styled.tsx';
+// hooks
+export {
+  usePromptStorage,
+  useUpdatePromptStorage,
+  useShouldShowPrompt,
+} from './hooks/use-should-show-prompt.tsx';

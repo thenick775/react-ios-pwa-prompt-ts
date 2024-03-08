@@ -8,7 +8,7 @@ type PromptCopyProps = {
 
 type VisibleElementProps = {
   $isVisible?: boolean;
-  transitionDuration?: number;
+  $transitionDuration?: number;
 };
 
 export const PromptOverlay = styled.div<VisibleElementProps>`
@@ -21,8 +21,8 @@ export const PromptOverlay = styled.div<VisibleElementProps>`
   position: fixed;
   top: 0;
   transition: opacity
-    ${({ transitionDuration }) =>
-      transitionDuration ? `${transitionDuration / 2}ms` : '0.2s'}
+    ${({ $transitionDuration }) =>
+      $transitionDuration ? `${$transitionDuration}ms` : '0.2s'}
     ease-in;
   width: 100vw;
   z-index: 999999;
@@ -49,8 +49,8 @@ export const PromptWrapper = styled.div<VisibleElementProps>`
   position: fixed;
   transform: translateY(calc(100% + 10px));
   transition: transform
-    ${({ transitionDuration }) =>
-      transitionDuration ? `${transitionDuration}ms` : '0.4s'}
+    ${({ $transitionDuration }) =>
+      $transitionDuration ? `${$transitionDuration}ms` : '0.4s'}
     cubic-bezier(0.4, 0.24, 0.3, 1);
   width: calc(100vw - 16px);
   z-index: 999999;

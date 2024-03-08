@@ -59,7 +59,7 @@ export const Prompt = ({
         role="button"
         onClick={dismissPrompt}
         $isVisible={isVisible}
-        transitionDuration={transitionDuration}
+        $transitionDuration={transitionDuration && transitionDuration / 2}
       />
       <PromptWrapper
         className={className}
@@ -71,7 +71,7 @@ export const Prompt = ({
         onTransitionEnd={(e) => {
           if (onAfterDismiss && !isVisible) onAfterDismiss(e);
         }}
-        transitionDuration={transitionDuration}
+        $transitionDuration={transitionDuration}
       >
         <PromptHeader>
           <PromptTitle id={promptTitleId}>{copyTitle}</PromptTitle>
