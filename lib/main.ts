@@ -1,9 +1,5 @@
 // main component and data types
-export {
-  PwaPrompt,
-  PromptLocalStorageKey,
-  type PwaPromptData,
-} from './components/pwa-prompt.tsx';
+export { PwaPrompt, PromptLocalStorageKey } from './components/pwa-prompt.tsx';
 // sub components for customization
 export { Prompt } from './components/prompt.tsx';
 export {
@@ -23,6 +19,7 @@ export {
 // hooks
 export {
   usePromptStorage,
-  useUpdatePromptStorage,
   useShouldShowPrompt,
+  type PwaPromptData,
 } from './hooks/use-should-show-prompt.tsx';
+export { useUpdatePromptStorage } from './hooks/use-update-prompt-storage.tsx';
