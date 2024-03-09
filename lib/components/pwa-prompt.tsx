@@ -30,7 +30,7 @@ export const PwaPrompt = ({
   copyClosePrompt = 'Cancel',
   copyShareButtonLabel = "1) Press the 'Share' button on the menu bar below.",
   copyTitle = 'Add to Home Screen',
-  isOpen = false,
+  isOpen = undefined,
   delay = 1000,
   onClose = undefined,
   permanentlyHideOnDismiss = true,
@@ -70,9 +70,11 @@ export const PwaPrompt = ({
     ]
   );
 
-  if ((!shouldShowPrompt || isDismissed) && !isOpen) {
+  if (
+    (!shouldShowPrompt || isDismissed || isOpen === false) &&
+    !isOpen === true
+  )
     return null;
-  }
 
   return (
     <Prompt

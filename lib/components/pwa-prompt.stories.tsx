@@ -83,7 +83,6 @@ export const Primary: Story = {
     copyClosePrompt: 'Cancel',
     copyShareButtonLabel: "1) Press the 'Share' button on the menu bar below.",
     copyTitle: 'Add to Home Screen',
-    isOpen: false,
     delay: 1000,
     permanentlyHideOnDismiss: true,
     promptLocalStorageKey: 'iosPwaPrompt',
