@@ -23,13 +23,16 @@ export const useShouldShowPrompt = ({
   promptOnVisit,
   timesToShow,
 }: UseShouldShowPromptProps) => {
-  const [iosPwaPrompt] = usePromptStorage(promptLocalStorageKey);
+  const [iosPwaPrompt, setIosPwaPrompt] = usePromptStorage(
+    promptLocalStorageKey
+  );
 
   const aboveMinVisits = iosPwaPrompt.visits >= promptOnVisit;
   const belowMaxVisits = iosPwaPrompt.visits < promptOnVisit + timesToShow;
 
   return {
-    ...iosPwaPrompt,
+    iosPwaPrompt,
+    setIosPwaPrompt,
     shouldShowPrompt: iosPwaPrompt.isiOS && aboveMinVisits && belowMaxVisits,
   };
 };
