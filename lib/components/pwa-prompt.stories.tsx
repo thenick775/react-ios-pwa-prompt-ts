@@ -18,6 +18,9 @@ const meta: Meta<PwaPromptPropsAndCustomArgs> = {
         height: '350px',
         inline: false,
       },
+      canvas: {
+        sourceState: 'shown',
+      },
       page: () => (
         <>
           <Title />
@@ -91,7 +94,7 @@ export const Primary: Story = {
  * This can be used to reactivate the prompt based on a user interaction on demand.
  */
 export const Controlled: Story = {
-  render: (props) => {
+  render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
@@ -103,7 +106,7 @@ export const Controlled: Story = {
           Open Prompt
         </button>
         <PwaPrompt
-          {...props}
+          {...args}
           isOpen={isOpen}
           onClose={() => {
             setIsOpen(false);
@@ -115,5 +118,6 @@ export const Controlled: Story = {
   args: {
     promptLocalStorageKey: 'iosPwaPrompt-controlled',
   },
+  parameters: { docs: { source: { type: 'code' } } },
   tags: ['autodocs'],
 };
