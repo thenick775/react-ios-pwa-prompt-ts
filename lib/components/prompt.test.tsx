@@ -1,5 +1,5 @@
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { userEvent } from '@testing-library/user-event';
 
 import { Prompt } from './prompt.tsx';
@@ -14,7 +14,7 @@ const defaultProps = {
 };
 
 describe('<Prompt />', () => {
-  test('renders Prompt component with provided props', async () => {
+  it('renders Prompt component with provided props', async () => {
     const user = userEvent.setup();
 
     render(<Prompt {...defaultProps} />);
@@ -61,7 +61,7 @@ describe('<Prompt />', () => {
     expect(screen.queryByTestId('prompt-overlay')).not.toBeVisible();
   });
 
-  test('calls onAfterDismiss callback when prompt is dismissed by overlay', async () => {
+  it('calls onAfterDismiss callback when prompt is dismissed by overlay', async () => {
     const onAfterDismissMock = vi.fn();
     const user = userEvent.setup();
 
@@ -82,7 +82,7 @@ describe('<Prompt />', () => {
     expect(onAfterDismissMock).toHaveBeenCalledTimes(1);
   });
 
-  test('calls onAfterDismiss callback when prompt is dismissed by button', async () => {
+  it('calls onAfterDismiss callback when prompt is dismissed by button', async () => {
     const onAfterDismissMock = vi.fn();
     const user = userEvent.setup();
 

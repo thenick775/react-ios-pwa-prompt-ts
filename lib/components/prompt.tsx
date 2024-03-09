@@ -47,9 +47,7 @@ export const Prompt = ({
 
   useInterval(() => setVisibility(true), delay && !isVisible ? delay : null);
 
-  const dismissPrompt = () => {
-    setVisibility(false);
-  };
+  const dismissPrompt = () => setVisibility(false);
 
   return (
     <>

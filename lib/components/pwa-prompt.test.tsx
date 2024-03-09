@@ -101,12 +101,6 @@ describe('<PwaPrompt />', () => {
   });
 
   it('does not render PwaPrompt if already in standalone mode', async () => {
-    vi.spyOn(rddExports, 'useDeviceSelectors').mockReturnValue([
-      {
-        isIOS: true,
-        isIPad13: false,
-      },
-    ]);
     vi.spyOn(window, 'navigator', 'get').mockReturnValue({
       standalone: true,
     } as iOSNavigator);
