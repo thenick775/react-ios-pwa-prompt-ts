@@ -114,6 +114,27 @@ describe('<PwaPrompt />', () => {
     );
   });
 
+  it('renders Prompt when controlled', () => {
+    window.localStorage.setItem('iosPwaPrompt', '{"isiOS":true,"visits":2}');
+
+    render(<PwaPrompt isOpen={true} />);
+
+    expect(screen.getByTestId('prompt-wrapper')).toBeInTheDocument();
+    expect(window.localStorage.getItem('iosPwaPrompt')).toEqual(
+      '{"isiOS":true,"visits":3}'
+    );
+  });
+
+  it('does not render Prompt when controlled', () => {
+    render(<PwaPrompt isOpen={false} />);
+
+    expect(screen.queryByTestId('prompt-overlay')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('prompt-wrapper')).not.toBeInTheDocument();
+    expect(window.localStorage.getItem('iosPwaPrompt')).toEqual(
+      '{"isiOS":true,"visits":1}'
+    );
+  });
+
   it('dismisses Prompt using overlay', async () => {
     const user = userEvent.setup();
 
