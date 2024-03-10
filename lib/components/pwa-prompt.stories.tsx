@@ -52,6 +52,15 @@ const meta: Meta<PwaPromptPropsAndCustomArgs> = {
             default, it will be set to a mobile iOS user agent.
           </p>
           <Stories />
+          <h3>Props</h3>
+          <p>
+            Iframe stories have been used for isolation due to body scroll
+            locking.
+          </p>
+          <p>
+            The controls below serve more as documentation of what props are
+            currently available.
+          </p>
           <Controls />
         </>
       ),
@@ -60,6 +69,11 @@ const meta: Meta<PwaPromptPropsAndCustomArgs> = {
   argTypes: {
     useragent: {
       description: 'Provided by a storybook plugin, this is not an actual prop',
+    },
+    skipStorageUpdate: {
+      control: 'boolean',
+      description:
+        'Allows for manual control over the prompt automatically updating storage, in the case you want to control counters yourself',
     },
   },
   args: {
@@ -85,6 +99,7 @@ export const Primary: Story = {
     copyTitle: 'Add to Home Screen',
     delay: 1000,
     permanentlyHideOnDismiss: true,
+    skipStorageUpdate: false,
     promptLocalStorageKey: 'iosPwaPrompt',
     promptOnVisit: 1,
     timesToShow: 1,
