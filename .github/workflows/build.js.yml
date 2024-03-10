@@ -7,7 +7,23 @@ on:
     branches: ['**']
 
 jobs:
+  change-detect:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      duplicate_check: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v5
+        with:
+          concurrent_skipping: 'same_content_newer'
+          cancel_others: 'true'
+          do_not_skip: '["pull_request", "workflow_dispatch", "schedule", "merge_group"]'
+
   build:
+    needs: change-detect
+    if: needs.change-detect.outputs.duplicate_check != 'true'
     runs-on: ubuntu-latest
 
     steps:
