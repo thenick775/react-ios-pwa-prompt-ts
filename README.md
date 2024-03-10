@@ -16,7 +16,7 @@ A React component that provides a customisable Progressive Web App (PWA) prompt 
 
 - 🛠 Fully configurable:
   - Set the frequency and conditions for displaying the prompt.
-  - All components and hooks are exported for full customization and composition.
+  - All components and hooks are [exported](./lib/main.ts) for full customization and composition.
 - 📃 Customize prompt content based on PWA availability and full-screen mode.
 - ⚡️ Efficient: Minimal overhead for non-iOS devices, optimizing each page load.
 - 🌕 Dark mode support: Adapts to iOS 13 and 14 settings.
