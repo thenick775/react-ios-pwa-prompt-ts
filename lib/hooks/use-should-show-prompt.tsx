@@ -2,8 +2,8 @@ import { useLocalStorage } from 'usehooks-ts';
 
 type UseShouldShowPromptProps = {
   promptLocalStorageKey: string;
-  promptOnVisit: number;
-  timesToShow: number;
+  promptOnVisit?: number;
+  timesToShow?: number;
 };
 
 export type PwaPromptData = {
@@ -20,8 +20,8 @@ export const usePromptStorage = (promptLocalStorageKey: string) => {
 
 export const useShouldShowPrompt = ({
   promptLocalStorageKey,
-  promptOnVisit,
-  timesToShow,
+  promptOnVisit = 1,
+  timesToShow = 1,
 }: UseShouldShowPromptProps) => {
   const [iosPwaPrompt, setIosPwaPrompt] = usePromptStorage(
     promptLocalStorageKey
