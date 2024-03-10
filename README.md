@@ -50,22 +50,25 @@ import { PwaPrompt } from 'react-ios-pwa-prompt-ts'
 
 5. Optional configuration props:
 
-- `className`: Add a custom class name to the prompt component, for use with `styled-components`.
-- `copyAddHomeButtonLabel`: pass a string to customise label of add to home instruction. Defaults to `2) Press 'Add to Home Screen'`.
-- `copyBody`: pass a string to customise the body of the prompt. Defaults to `This website has app functionality. Add it to your home screen to use it in fullscreen and while offline.`.
-- `copyClosePrompt`: pass a string to customise label of close button. Defaults to `Cancel`.
-- `copyShareButtonLabel`: pass a string to customise label of share button. Defaults to `1) Press the 'Share' button`.
-- `copyTitle`: pass a string to customise the title of the prompt. Defaults to `Add to Home Screen`.
-- `isOpen`: pass a boolean to control when the prompt displays, for use when using this prompt as a controlled component.
-- `delay`: pass an integer in ms to add a delay to the prompt. Defaults to `1000`.
-- `onClose`: pass a function to call upon closing the prompt. Passes the event object as the function argument. Defaults to a noop.
-- `permanentlyHideOnDismiss`: pass a boolean to configure whether to never show the prompt again once dismissed. Defaults to `true` (hide forever).
-- `promptLocalStorageKey`: Provide a custom key for storing prompt data in local storage. Defaults to `iosPwaPrompt`.
-- `promptOnVisit`: pass an integer for the when to start showing the prompt. Defaults to `1` (the first page visit).
-- `timesToShow`: pass an integer to configure how many times to show the prompt. Defaults to `1`.
-- `transitionDuration`: pass an integer in ms to control the duration of the prompt transition in and out of the viewport. Defaults to `400`.
+| Name                       | Description                                                                                                                                                                 | Default Value                                                                                               |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `className`                | Add a custom class name to the prompt component, for use with `styled-components`.                                                                                          |                                                                                                             |
+| `copyAddHomeButtonLabel`   | Pass a string to customize label of add to home instruction. Defaults to `2) Press 'Add to Home Screen'`.                                                                   | `2) Press 'Add to Home Screen'`                                                                             |
+| `copyBody`                 | Pass a string to customize the body of the prompt. Defaults to `This website has app functionality. Add it to your home screen to use it in fullscreen and while offline.`. | `This website has app functionality. Add it to your home screen to use it in fullscreen and while offline.` |
+| `copyClosePrompt`          | Pass a string to customize label of close button. Defaults to `Cancel`.                                                                                                     | `Cancel`                                                                                                    |
+| `copyShareButtonLabel`     | Pass a string to customize label of share button. Defaults to `1) Press the 'Share' button`.                                                                                | `1) Press the 'Share' button`                                                                               |
+| `copyTitle`                | Pass a string to customize the title of the prompt. Defaults to `Add to Home Screen`.                                                                                       | `Add to Home Screen`                                                                                        |
+| `delay`                    | Pass an integer in ms to add a delay to the prompt. Defaults to `1000`.                                                                                                     | `1000`                                                                                                      |
+| `isOpen`                   | Pass a boolean to control when the prompt displays, for use when using this prompt as a controlled component.                                                               | `undefined`                                                                                                 |
+| `onClose`                  | Pass a function to call upon closing the prompt. Passes the event object as the function argument.                                                                          | `undefined`                                                                                                 |
+| `permanentlyHideOnDismiss` | Pass a boolean to configure whether to never show the prompt again once dismissed. Defaults to `true` (hide forever).                                                       | `true`                                                                                                      |
+| `promptLocalStorageKey`    | Provide a custom key for storing prompt data in local storage. Defaults to `iosPwaPrompt`.                                                                                  | `iosPwaPrompt`                                                                                              |
+| `promptOnVisit`            | Pass an integer for the when to start showing the prompt. Defaults to `1` (the first page visit).                                                                           | `1`                                                                                                         |
+| `skipStorageUpdate`        | Allows for manual control over the prompt automatically updating storage, in the case you want to control counters yourself                                                 | `undefined`                                                                                                 |
+| `timesToShow`              | Pass an integer to configure how many times to show the prompt. Defaults to `1`.                                                                                            | `1`                                                                                                         |
+| `transitionDuration`       | Pass an integer in ms to control the duration of the prompt transition in and out of the viewport. Defaults to `400`.                                                       | `400`                                                                                                       |
 
-See the interactive storybook demo for further information.
+See the interactive [Storybook Demo](https://thenick775.github.io/react-ios-pwa-prompt-ts/) for further information.
 
 ## Storybook
 
