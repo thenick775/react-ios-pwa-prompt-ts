@@ -48,7 +48,7 @@ describe('<PwaPrompt />', () => {
     } as iOSNavigator);
   });
 
-  it('renders PwaPrompt if on an iOS browser not in standalone mode', async () => {
+  it('renders Prompt if on an iOS browser not in standalone mode', async () => {
     render(<PwaPrompt />);
 
     // Wait for the delay to pass
@@ -62,7 +62,7 @@ describe('<PwaPrompt />', () => {
     );
   });
 
-  it('renders PwaPrompt if on an ipad iOS browser not in standalone mode', async () => {
+  it('renders Prompt if on an ipad iOS browser not in standalone mode', async () => {
     vi.spyOn(rddExports, 'useDeviceSelectors').mockReturnValue([
       {
         isIOS: false,
@@ -83,7 +83,7 @@ describe('<PwaPrompt />', () => {
     );
   });
 
-  it('does not render PwaPrompt if not an ipad or iOS browser', () => {
+  it('does not render Prompt if not an ipad or iOS browser', () => {
     vi.spyOn(rddExports, 'useDeviceSelectors').mockReturnValue([
       {
         isIOS: false,
@@ -100,7 +100,7 @@ describe('<PwaPrompt />', () => {
     );
   });
 
-  it('does not render PwaPrompt if already in standalone mode', async () => {
+  it('does not render Prompt if already in standalone mode', async () => {
     vi.spyOn(window, 'navigator', 'get').mockReturnValue({
       standalone: true,
     } as iOSNavigator);
@@ -114,7 +114,7 @@ describe('<PwaPrompt />', () => {
     );
   });
 
-  it('dismisses PwaPrompt using overlay', async () => {
+  it('dismisses Prompt using overlay', async () => {
     const user = userEvent.setup();
 
     render(<PwaPrompt />);
@@ -136,7 +136,7 @@ describe('<PwaPrompt />', () => {
     );
   });
 
-  it('dismisses PwaPrompt using button', async () => {
+  it('dismisses Prompt using button', async () => {
     const user = userEvent.setup();
 
     render(<PwaPrompt />);
