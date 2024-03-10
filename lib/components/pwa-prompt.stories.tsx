@@ -89,7 +89,7 @@ type Story = StoryObj<PwaPromptPropsAndCustomArgs>;
  * Here you can interact with the PwaPrompt as it will appear in your application with default arguments
  */
 export const Primary: Story = {
-  render: (props) => <PwaPrompt {...props} />,
+  render: (args) => <PwaPrompt {...args} />,
   args: {
     copyAddHomeButtonLabel: "2) Press 'Add to Home Screen'.",
     copyBody:
