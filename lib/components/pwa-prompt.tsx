@@ -1,13 +1,8 @@
-import {
-  useCallback,
-  useLayoutEffect,
-  useState,
-  type TransitionEvent,
-} from 'react';
-import { useLocalStorage } from 'usehooks-ts';
-import { useDeviceSelectors } from 'react-device-detect';
+import { useCallback, useState, type TransitionEvent } from 'react';
 
 import { Prompt } from './prompt.tsx';
+import { useUpdatePromptStorage } from '../hooks/use-update-prompt-storage.tsx';
+import { useShouldShowPrompt } from '../main.ts';
 
 type PwaPromptProps = {
   className?: string;
@@ -16,29 +11,15 @@ type PwaPromptProps = {
   copyClosePrompt?: string;
   copyShareButtonLabel?: string;
   copyTitle?: string;
-  debug?: boolean;
   delay?: number;
+  isOpen?: boolean;
   onClose?: (e: TransitionEvent) => void;
   permanentlyHideOnDismiss?: boolean;
   promptLocalStorageKey?: string;
   promptOnVisit?: number;
+  skipStorageUpdate?: boolean;
   timesToShow?: number;
-};
-
-export type PwaPromptData = {
-  isiOS: boolean;
-  visits: number;
-};
-
-const deviceCheck = (
-  isIOS: boolean,
-  isIPad13: boolean,
-  navigator: Navigator
-) => {
-  const isStandalone =
-    !!navigator && 'standalone' in navigator && navigator.standalone;
-
-  return (isIOS || isIPad13) && !isStandalone;
+  transitionDuration?: number;
 };
 
 export const PromptLocalStorageKey = 'iosPwaPrompt';
@@ -50,34 +31,30 @@ export const PwaPrompt = ({
   copyClosePrompt = 'Cancel',
   copyShareButtonLabel = "1) Press the 'Share' button on the menu bar below.",
   copyTitle = 'Add to Home Screen',
-  debug = false,
   delay = 1000,
+  isOpen = undefined,
   onClose = undefined,
   permanentlyHideOnDismiss = true,
   promptLocalStorageKey = PromptLocalStorageKey,
   promptOnVisit = 1,
+  skipStorageUpdate = false,
   timesToShow = 1,
+  transitionDuration = 400,
 }: PwaPromptProps) => {
   const [isDismissed, setIsDismissed] = useState(false);
-  const [{ isIOS, isIPad13 }] = useDeviceSelectors(window.navigator.userAgent);
-  const [iosPwaPrompt, setIosPwaPrompt] = useLocalStorage<PwaPromptData>(
+
+  const { shouldShowPrompt, setIosPwaPrompt } = useShouldShowPrompt({
     promptLocalStorageKey,
-    {
-      isiOS: false,
-      visits: 0,
-    }
-  );
+    promptOnVisit,
+    timesToShow,
+  });
 
-  // runs once on mount, determines if iOS/iPadOS and increments visit counter
-  useLayoutEffect(() => {
-    const isiOS = deviceCheck(isIOS, isIPad13, window.navigator);
-    setIosPwaPrompt((prevState) => ({
-      isiOS,
-      visits: isiOS ? prevState.visits + 1 : prevState.visits,
-    }));
-  }, [setIosPwaPrompt, isIOS, isIPad13]);
+  useUpdatePromptStorage({
+    setIosPwaPrompt,
+    skipStorageUpdate,
+  });
 
-  const onDismiss = useCallback(
+  const onAfterDismiss = useCallback(
     (e: TransitionEvent) => {
       if (permanentlyHideOnDismiss)
         setIosPwaPrompt((prevState) => ({
@@ -98,18 +75,11 @@ export const PwaPrompt = ({
     ]
   );
 
-  const aboveMinVisits = iosPwaPrompt.visits >= promptOnVisit;
-  const belowMaxVisits = iosPwaPrompt.visits < promptOnVisit + timesToShow;
-
   if (
-    (!iosPwaPrompt.isiOS ||
-      !aboveMinVisits ||
-      !belowMaxVisits ||
-      isDismissed) &&
-    !debug
-  ) {
+    (!shouldShowPrompt || isDismissed || isOpen === false) &&
+    !isOpen === true
+  )
     return null;
-  }
 
   return (
     <Prompt
@@ -120,7 +90,8 @@ export const PwaPrompt = ({
       copyAddHomeButtonLabel={copyAddHomeButtonLabel}
       copyShareButtonLabel={copyShareButtonLabel}
       copyClosePrompt={copyClosePrompt}
-      onDismiss={onDismiss}
+      onAfterDismiss={onAfterDismiss}
+      transitionDuration={transitionDuration}
     />
   );
 };

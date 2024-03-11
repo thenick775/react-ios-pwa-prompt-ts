@@ -1,13 +1,6 @@
-import {
-  Title,
-  Subtitle,
-  Description,
-  Controls,
-  Source,
-  Story,
-} from '@storybook/blocks';
+import { Title, Subtitle, Controls, Story, Stories } from '@storybook/blocks';
 import type { Meta, StoryObj } from '@storybook/react';
-import { ComponentProps } from 'react';
+import { ComponentProps, useState } from 'react';
 
 import { PwaPrompt } from './pwa-prompt.tsx';
 
@@ -21,11 +14,22 @@ const meta: Meta<PwaPromptPropsAndCustomArgs> = {
   component: PwaPrompt,
   parameters: {
     docs: {
+      story: {
+        height: '350px',
+        inline: false,
+      },
+      canvas: {
+        sourceState: 'shown',
+      },
       page: () => (
         <>
           <Title />
           <Subtitle />
-          <Description of={Primary} />
+          <p>
+            If you are not seeing the prompt, either raise the timesToShow,
+            clear your localstorage using the button below, or re-mount the
+            component.
+          </p>
           <button onClick={() => window.localStorage.clear()}>
             Clear localStorage
           </button>
@@ -43,11 +47,33 @@ const meta: Meta<PwaPromptPropsAndCustomArgs> = {
           <button onClick={linkTo('components/prompt')}>
             Go to prompt mobile view
           </button>
-          <Story inline />
-          <Source />
+          <p>
+            You can change the user agent using the tools above the story. By
+            default, it will be set to a mobile iOS user agent.
+          </p>
+          <Stories />
+          <h3>Props</h3>
+          <p>
+            Iframe stories have been used for isolation due to body scroll
+            locking.
+          </p>
+          <p>
+            The controls below serve more as documentation of what props are
+            currently available.
+          </p>
           <Controls />
         </>
       ),
+    },
+  },
+  argTypes: {
+    useragent: {
+      description: 'Provided by a storybook plugin, this is not an actual prop',
+    },
+    skipStorageUpdate: {
+      control: 'boolean',
+      description:
+        'Allows for manual control over the prompt automatically updating storage, in the case you want to control counters yourself',
     },
   },
   args: {
@@ -60,14 +86,10 @@ export default meta;
 type Story = StoryObj<PwaPromptPropsAndCustomArgs>;
 
 /**
- * Here you can interact with the PwaPrompt as it will appear in your application.
- *
- * You can change the user agent using the tools above the story. By default, it will be set to a mobile iOS user agent.
- *
- * If you are not seeing the prompt component, either raise the timesToShow, clear your localstorage, or re-mount the component.
+ * Here you can interact with the PwaPrompt as it will appear in your application with default arguments
  */
 export const Primary: Story = {
-  render: (props) => <PwaPrompt {...props} />,
+  render: (args) => <PwaPrompt {...args} />,
   args: {
     copyAddHomeButtonLabel: "2) Press 'Add to Home Screen'.",
     copyBody:
@@ -75,12 +97,46 @@ export const Primary: Story = {
     copyClosePrompt: 'Cancel',
     copyShareButtonLabel: "1) Press the 'Share' button on the menu bar below.",
     copyTitle: 'Add to Home Screen',
-    debug: false,
     delay: 1000,
     permanentlyHideOnDismiss: true,
+    skipStorageUpdate: false,
     promptLocalStorageKey: 'iosPwaPrompt',
     promptOnVisit: 1,
     timesToShow: 1,
+    transitionDuration: 400,
   },
+  tags: ['autodocs'],
+};
+
+/**
+ * Here is a basic example of using this prompt as a controlled component.
+ * This can be used to reactivate the prompt based on a user interaction on demand.
+ */
+export const Controlled: Story = {
+  render: (args) => {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+      <>
+        <button
+          onClick={() => {
+            setIsOpen((prevState) => !prevState);
+          }}
+        >
+          Open Prompt
+        </button>
+        <PwaPrompt
+          {...args}
+          isOpen={isOpen}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+        />
+      </>
+    );
+  },
+  args: {
+    promptLocalStorageKey: 'iosPwaPrompt-controlled',
+  },
+  parameters: { docs: { source: { type: 'code' } } },
   tags: ['autodocs'],
 };

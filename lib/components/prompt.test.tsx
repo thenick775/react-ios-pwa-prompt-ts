@@ -1,5 +1,5 @@
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { userEvent } from '@testing-library/user-event';
 
 import { Prompt } from './prompt.tsx';
@@ -14,7 +14,7 @@ const defaultProps = {
 };
 
 describe('<Prompt />', () => {
-  test('renders Prompt component with provided props', async () => {
+  it('renders Prompt component with provided props', async () => {
     const user = userEvent.setup();
 
     render(<Prompt {...defaultProps} />);
@@ -61,11 +61,13 @@ describe('<Prompt />', () => {
     expect(screen.queryByTestId('prompt-overlay')).not.toBeVisible();
   });
 
-  test('calls onDismiss callback when prompt is dismissed by overlay', async () => {
-    const onDismissMock = vi.fn();
+  it('calls onAfterDismiss callback when prompt is dismissed by overlay', async () => {
+    const onAfterDismissMock = vi.fn();
     const user = userEvent.setup();
 
-    render(<Prompt {...defaultProps} delay={0} onDismiss={onDismissMock} />);
+    render(
+      <Prompt {...defaultProps} delay={0} onAfterDismiss={onAfterDismissMock} />
+    );
 
     // Check if the prompt is initially visible
     expect(screen.getByTestId('prompt-overlay')).toBeVisible();
@@ -76,15 +78,17 @@ describe('<Prompt />', () => {
     // transition end is not fired normally, we need to simulate a transition to call the callback func
     fireEvent.transitionEnd(screen.getByTestId('prompt-wrapper'));
 
-    // Check if the onDismiss callback was called
-    expect(onDismissMock).toHaveBeenCalledTimes(1);
+    // Check if the onAfterDismiss callback was called
+    expect(onAfterDismissMock).toHaveBeenCalledTimes(1);
   });
 
-  test('calls onDismiss callback when prompt is dismissed by button', async () => {
-    const onDismissMock = vi.fn();
+  it('calls onAfterDismiss callback when prompt is dismissed by button', async () => {
+    const onAfterDismissMock = vi.fn();
     const user = userEvent.setup();
 
-    render(<Prompt {...defaultProps} delay={0} onDismiss={onDismissMock} />);
+    render(
+      <Prompt {...defaultProps} delay={0} onAfterDismiss={onAfterDismissMock} />
+    );
 
     // Check if the prompt is initially visible
     expect(screen.getByTestId('prompt-dismiss-button')).toBeVisible();
@@ -95,7 +99,7 @@ describe('<Prompt />', () => {
     // transition end is not fired normally, we need to simulate a transition to call the callback func
     fireEvent.transitionEnd(screen.getByTestId('prompt-wrapper'));
 
-    // Check if the onDismiss callback was called
-    expect(onDismissMock).toHaveBeenCalledTimes(1);
+    // Check if the onAfterDismiss callback was called
+    expect(onAfterDismissMock).toHaveBeenCalledTimes(1);
   });
 });

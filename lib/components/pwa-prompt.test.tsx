@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { PwaPrompt } from './pwa-prompt.tsx';
 
@@ -48,7 +48,7 @@ describe('<PwaPrompt />', () => {
     } as iOSNavigator);
   });
 
-  test('renders PwaPrompt if on an iOS browser not in standalone mode', async () => {
+  it('renders Prompt if on an iOS browser not in standalone mode', async () => {
     render(<PwaPrompt />);
 
     // Wait for the delay to pass
@@ -62,7 +62,7 @@ describe('<PwaPrompt />', () => {
     );
   });
 
-  test('renders PwaPrompt if on an ipad iOS browser not in standalone mode', async () => {
+  it('renders Prompt if on an ipad iOS browser not in standalone mode', async () => {
     vi.spyOn(rddExports, 'useDeviceSelectors').mockReturnValue([
       {
         isIOS: false,
@@ -83,7 +83,7 @@ describe('<PwaPrompt />', () => {
     );
   });
 
-  test('does not render PwaPrompt if not an ipad or iOS browser', () => {
+  it('does not render Prompt if not an ipad or iOS browser', () => {
     vi.spyOn(rddExports, 'useDeviceSelectors').mockReturnValue([
       {
         isIOS: false,
@@ -100,7 +100,7 @@ describe('<PwaPrompt />', () => {
     );
   });
 
-  test('does not render PwaPrompt if already in standalone mode', async () => {
+  it('does not render Prompt if already in standalone mode', async () => {
     vi.spyOn(window, 'navigator', 'get').mockReturnValue({
       standalone: true,
     } as iOSNavigator);
@@ -114,7 +114,28 @@ describe('<PwaPrompt />', () => {
     );
   });
 
-  test('dismisses PwaPrompt using overlay', async () => {
+  it('renders Prompt when controlled', () => {
+    window.localStorage.setItem('iosPwaPrompt', '{"isiOS":true,"visits":2}');
+
+    render(<PwaPrompt isOpen={true} />);
+
+    expect(screen.getByTestId('prompt-wrapper')).toBeInTheDocument();
+    expect(window.localStorage.getItem('iosPwaPrompt')).toEqual(
+      '{"isiOS":true,"visits":3}'
+    );
+  });
+
+  it('does not render Prompt when controlled', () => {
+    render(<PwaPrompt isOpen={false} />);
+
+    expect(screen.queryByTestId('prompt-overlay')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('prompt-wrapper')).not.toBeInTheDocument();
+    expect(window.localStorage.getItem('iosPwaPrompt')).toEqual(
+      '{"isiOS":true,"visits":1}'
+    );
+  });
+
+  it('dismisses Prompt using overlay', async () => {
     const user = userEvent.setup();
 
     render(<PwaPrompt />);
@@ -136,7 +157,7 @@ describe('<PwaPrompt />', () => {
     );
   });
 
-  test('dismisses PwaPrompt using button', async () => {
+  it('dismisses Prompt using button', async () => {
     const user = userEvent.setup();
 
     render(<PwaPrompt />);
@@ -158,7 +179,7 @@ describe('<PwaPrompt />', () => {
     );
   });
 
-  test('calls onClose callback when prompt is dismissed by overlay', async () => {
+  it('calls onClose callback when prompt is dismissed by overlay', async () => {
     const onCloseMock = vi.fn();
     const user = userEvent.setup();
 
@@ -182,7 +203,7 @@ describe('<PwaPrompt />', () => {
     );
   });
 
-  test('calls onClose callback when prompt is dismissed by button', async () => {
+  it('calls onClose callback when prompt is dismissed by button', async () => {
     const onCloseMock = vi.fn();
     const user = userEvent.setup();
 
