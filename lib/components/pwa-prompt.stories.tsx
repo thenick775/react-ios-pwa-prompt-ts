@@ -12,6 +12,7 @@ type PwaPromptPropsAndCustomArgs = ComponentProps<typeof PwaPrompt> & {
 
 const meta: Meta<PwaPromptPropsAndCustomArgs> = {
   component: PwaPrompt,
+  tags: ['autodocs'],
   parameters: {
     docs: {
       story: {
@@ -27,7 +28,7 @@ const meta: Meta<PwaPromptPropsAndCustomArgs> = {
           <Subtitle />
           <p>
             If you are not seeing the prompt, either raise the timesToShow,
-            clear your localstorage using the button below, or re-mount the
+            clear your localStorage using the button below, or re-mount the
             component.
           </p>
           <button onClick={() => window.localStorage.clear()}>
@@ -42,7 +43,7 @@ const meta: Meta<PwaPromptPropsAndCustomArgs> = {
           </button>
           <p>
             Use the button below to view the prompt component in a mobile
-            viewport with no localstorage or conditional rendering:
+            viewport with no localStorage or conditional rendering:
           </p>
           <button onClick={linkTo('components/prompt')}>
             Go to prompt mobile view
@@ -105,7 +106,6 @@ export const Primary: Story = {
     timesToShow: 1,
     transitionDuration: 400,
   },
-  tags: ['autodocs'],
 };
 
 /**
@@ -138,5 +138,4 @@ export const Controlled: Story = {
     promptLocalStorageKey: 'iosPwaPrompt-controlled',
   },
   parameters: { docs: { source: { type: 'code' } } },
-  tags: ['autodocs'],
 };
