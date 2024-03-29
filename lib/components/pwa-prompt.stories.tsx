@@ -1,5 +1,6 @@
 import { Title, Subtitle, Controls, Story, Stories } from '@storybook/blocks';
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
 import { ComponentProps, useState } from 'react';
 
 import { PwaPrompt } from './pwa-prompt.tsx';
@@ -105,6 +106,7 @@ export const Primary: Story = {
     promptOnVisit: 1,
     timesToShow: 1,
     transitionDuration: 400,
+    onClose: fn(),
   },
 };
 
