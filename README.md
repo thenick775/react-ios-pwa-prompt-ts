@@ -90,6 +90,14 @@ npm run storybook
 
 You can now explore stories, view docs, make changes to the components, and see the live updates in Storybook!
 
+## Rollup Visualizer
+
+To view the size of this package and its dependencies, run the following command:
+
+```
+npm run stats
+```
+
 ## Contributing
 
 Feel free to open discussions, issues, and pull requests. Contributions are welcome!
