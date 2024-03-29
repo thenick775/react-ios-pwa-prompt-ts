@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import { configDefaults } from 'vitest/config';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
   build: {
@@ -35,6 +36,7 @@ export default defineConfig({
         content,
       }),
     }),
+    visualizer({ gzipSize: true, filename: 'index.html' }),
   ],
   test: {
     globals: true,
