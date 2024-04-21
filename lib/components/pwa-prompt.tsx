@@ -57,10 +57,13 @@ export const PwaPrompt = ({
   const onAfterDismiss = useCallback(
     (e: TransitionEvent) => {
       if (permanentlyHideOnDismiss)
-        setIosPwaPrompt((prevState) => ({
-          ...prevState,
-          visits: promptOnVisit + timesToShow,
-        }));
+        setIosPwaPrompt(
+          (prevState) =>
+            prevState && {
+              ...prevState,
+              visits: promptOnVisit + timesToShow,
+            }
+        );
 
       setIsDismissed(true);
 

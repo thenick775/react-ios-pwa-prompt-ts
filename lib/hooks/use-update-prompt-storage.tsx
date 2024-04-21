@@ -26,7 +26,8 @@ export const useUpdatePromptStorage = ({
       const isiOS = deviceCheck(isIOS || isIPad13, window.navigator);
       setIosPwaPrompt((prevState) => ({
         isiOS,
-        visits: isiOS ? prevState.visits + 1 : prevState.visits,
+        visits:
+          isiOS && prevState ? prevState.visits + 1 : prevState?.visits || 0,
       }));
     }
   }, [setIosPwaPrompt, isIOS, isIPad13, skipStorageUpdate]);
