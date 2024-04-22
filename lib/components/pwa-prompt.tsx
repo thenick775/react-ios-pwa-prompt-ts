@@ -1,7 +1,7 @@
 import { useCallback, useState, type TransitionEvent } from 'react';
 
 import { Prompt } from './prompt.tsx';
-import { useUpdatePromptStorage } from '../hooks/use-update-prompt-storage.tsx';
+import { useUpdatePromptStorage } from '../hooks/use-update-prompt-storage.ts';
 import { useShouldShowPrompt } from '../main.ts';
 
 type PwaPromptProps = {
@@ -57,10 +57,13 @@ export const PwaPrompt = ({
   const onAfterDismiss = useCallback(
     (e: TransitionEvent) => {
       if (permanentlyHideOnDismiss)
-        setIosPwaPrompt((prevState) => ({
-          ...prevState,
-          visits: promptOnVisit + timesToShow,
-        }));
+        setIosPwaPrompt(
+          (prevState) =>
+            prevState && {
+              ...prevState,
+              visits: promptOnVisit + timesToShow,
+            }
+        );
 
       setIsDismissed(true);
 

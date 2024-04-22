@@ -1,6 +1,6 @@
 import { useLayoutEffect } from 'react';
 import { useDeviceSelectors } from 'react-device-detect';
-import { PwaPromptData } from './use-should-show-prompt.tsx';
+import { PwaPromptData } from './use-should-show-prompt.ts';
 
 type UseUpdatePromptStorageProps = {
   setIosPwaPrompt: React.Dispatch<React.SetStateAction<PwaPromptData>>;
@@ -26,7 +26,8 @@ export const useUpdatePromptStorage = ({
       const isiOS = deviceCheck(isIOS || isIPad13, window.navigator);
       setIosPwaPrompt((prevState) => ({
         isiOS,
-        visits: isiOS ? prevState.visits + 1 : prevState.visits,
+        visits:
+          isiOS && prevState ? prevState.visits + 1 : prevState?.visits || 0,
       }));
     }
   }, [setIosPwaPrompt, isIOS, isIPad13, skipStorageUpdate]);
