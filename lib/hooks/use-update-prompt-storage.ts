@@ -1,6 +1,6 @@
 import { useLayoutEffect } from 'react';
 import { useDeviceSelectors } from 'react-device-detect';
-import { PwaPromptData } from './use-should-show-prompt.tsx';
+import { PwaPromptData } from './use-should-show-prompt.ts';
 
 type UseUpdatePromptStorageProps = {
   setIosPwaPrompt: React.Dispatch<React.SetStateAction<PwaPromptData>>;

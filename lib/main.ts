@@ -21,5 +21,5 @@ export {
   usePromptStorage,
   useShouldShowPrompt,
   type PwaPromptData,
-} from './hooks/use-should-show-prompt.tsx';
-export { useUpdatePromptStorage } from './hooks/use-update-prompt-storage.tsx';
+} from './hooks/use-should-show-prompt.ts';
+export { useUpdatePromptStorage } from './hooks/use-update-prompt-storage.ts';
