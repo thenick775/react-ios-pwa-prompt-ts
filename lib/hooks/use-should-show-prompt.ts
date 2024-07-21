@@ -9,8 +9,9 @@ type UseShouldShowPromptProps = {
 
 export type PwaPromptData =
   | {
-      isiOS: boolean;
-      visits: number;
+      isiOS: boolean; // represents whether or not the device is considered iphone/ipad
+      visits: number; // represents current prompt render (visit) count
+      dismissedAt?: number; // represents when the user dismissed the prompt as a UTC epoch
     }
   | undefined;
 
@@ -43,12 +44,17 @@ export const useShouldShowPrompt = ({
   const aboveMinVisits = iosPwaPrompt && iosPwaPrompt.visits >= promptOnVisit;
   const belowMaxVisits =
     iosPwaPrompt && iosPwaPrompt.visits < promptOnVisit + timesToShow;
+  const shouldShowPrompt =
+    iosPwaPrompt?.isiOS &&
+    !iosPwaPrompt?.dismissedAt &&
+    aboveMinVisits &&
+    belowMaxVisits;
 
   return {
     aboveMinVisits,
     belowMaxVisits,
     iosPwaPrompt,
     setIosPwaPrompt,
-    shouldShowPrompt: iosPwaPrompt?.isiOS && aboveMinVisits && belowMaxVisits,
+    shouldShowPrompt,
   };
 };
