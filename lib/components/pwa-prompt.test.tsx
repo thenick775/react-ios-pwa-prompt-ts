@@ -20,7 +20,7 @@ type iOSNavigator = Navigator & { standalone?: boolean };
 
 describe('<PwaPrompt />', () => {
   beforeAll(() => {
-    const date = new Date(2001, 0, 1);
+    const date = Date.UTC(2001, 0, 1);
     vi.setSystemTime(date);
   });
 
@@ -149,7 +149,7 @@ describe('<PwaPrompt />', () => {
     expect(screen.queryByTestId('prompt-overlay')).not.toBeInTheDocument();
     expect(screen.queryByTestId('prompt-wrapper')).not.toBeInTheDocument();
     expect(window.localStorage.getItem('iosPwaPrompt')).toEqual(
-      '{"isiOS":true,"visits":2,"dismissedAt":978336000000}'
+      '{"isiOS":true,"visits":2,"dismissedAt":978307200000}'
     );
   });
 
@@ -171,7 +171,7 @@ describe('<PwaPrompt />', () => {
     expect(screen.queryByTestId('prompt-overlay')).not.toBeInTheDocument();
     expect(screen.queryByTestId('prompt-wrapper')).not.toBeInTheDocument();
     expect(window.localStorage.getItem('iosPwaPrompt')).toEqual(
-      '{"isiOS":true,"visits":2,"dismissedAt":978336000000}'
+      '{"isiOS":true,"visits":2,"dismissedAt":978307200000}'
     );
   });
 
@@ -195,7 +195,7 @@ describe('<PwaPrompt />', () => {
     // Check if the onClose callback was called
     expect(onCloseMock).toHaveBeenCalledTimes(1);
     expect(window.localStorage.getItem('iosPwaPrompt')).toEqual(
-      '{"isiOS":true,"visits":2,"dismissedAt":978336000000}'
+      '{"isiOS":true,"visits":2,"dismissedAt":978307200000}'
     );
   });
 
@@ -219,7 +219,7 @@ describe('<PwaPrompt />', () => {
     // Check if the onClose callback was called
     expect(onCloseMock).toHaveBeenCalledTimes(1);
     expect(window.localStorage.getItem('iosPwaPrompt')).toEqual(
-      '{"isiOS":true,"visits":2,"dismissedAt":978336000000}'
+      '{"isiOS":true,"visits":2,"dismissedAt":978307200000}'
     );
   });
 });

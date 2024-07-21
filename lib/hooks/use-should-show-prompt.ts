@@ -9,9 +9,9 @@ type UseShouldShowPromptProps = {
 
 export type PwaPromptData =
   | {
-      isiOS: boolean;
-      visits: number;
-      dismissedAt?: number;
+      isiOS: boolean; // represents whether or not the device is considered iphone/ipad
+      visits: number; // represents current prompt render (visit) count
+      dismissedAt?: number; // represents when the user dismissed the prompt as a UTC epoch
     }
   | undefined;
 
