@@ -19,7 +19,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/thenick775/react-ios-pwa-prompt-ts.git"
+    "url": "git+https://github.com/thenick775/react-ios-pwa-prompt-ts.git"
   },
   "main": "./dist/react-ios-pwa-prompt-ts.umd.cjs",
   "module": "./dist/react-ios-pwa-prompt-ts.js",

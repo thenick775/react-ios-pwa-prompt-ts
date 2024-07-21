@@ -1,4 +1,4 @@
-import { useCallback, useState, type TransitionEvent } from 'react';
+import { useCallback, type TransitionEvent } from 'react';
 
 import { Prompt } from './prompt.tsx';
 import { useUpdatePromptStorage } from '../hooks/use-update-prompt-storage.ts';
@@ -41,8 +41,6 @@ export const PwaPrompt = ({
   timesToShow = 1,
   transitionDuration = 400,
 }: PwaPromptProps) => {
-  const [isDismissed, setIsDismissed] = useState(false);
-
   const { shouldShowPrompt, setIosPwaPrompt } = useShouldShowPrompt({
     promptLocalStorageKey,
     promptOnVisit,
@@ -62,10 +60,9 @@ export const PwaPrompt = ({
             prevState && {
               ...prevState,
               visits: promptOnVisit + timesToShow,
+              dismissedAt: Date.now(),
             }
         );
-
-      setIsDismissed(true);
 
       if (onClose) onClose(e);
     },
@@ -78,11 +75,7 @@ export const PwaPrompt = ({
     ]
   );
 
-  if (
-    (!shouldShowPrompt || isDismissed || isOpen === false) &&
-    !isOpen === true
-  )
-    return null;
+  if ((!shouldShowPrompt || isOpen === false) && !isOpen === true) return null;
 
   return (
     <Prompt

@@ -1,5 +1,14 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from 'vitest';
 
 import { PwaPrompt } from './pwa-prompt.tsx';
 
@@ -10,9 +19,12 @@ import { userEvent } from '@testing-library/user-event';
 type iOSNavigator = Navigator & { standalone?: boolean };
 
 describe('<PwaPrompt />', () => {
-  beforeEach(() => {
-    window.localStorage.clear();
+  beforeAll(() => {
+    const date = new Date(2001, 0, 1);
+    vi.setSystemTime(date);
+  });
 
+  beforeEach(() => {
     vi.spyOn(rddExports, 'useDeviceSelectors').mockReturnValue([
       {
         isIOS: true,
@@ -22,6 +34,14 @@ describe('<PwaPrompt />', () => {
     vi.spyOn(window, 'navigator', 'get').mockReturnValue({
       standalone: false,
     } as iOSNavigator);
+  });
+
+  afterEach(() => {
+    localStorage.clear();
+  });
+
+  afterAll(() => {
+    vi.useRealTimers();
   });
 
   it('renders Prompt if on an iOS browser not in standalone mode', async () => {
@@ -129,7 +149,7 @@ describe('<PwaPrompt />', () => {
     expect(screen.queryByTestId('prompt-overlay')).not.toBeInTheDocument();
     expect(screen.queryByTestId('prompt-wrapper')).not.toBeInTheDocument();
     expect(window.localStorage.getItem('iosPwaPrompt')).toEqual(
-      '{"isiOS":true,"visits":2}'
+      '{"isiOS":true,"visits":2,"dismissedAt":978336000000}'
     );
   });
 
@@ -151,7 +171,7 @@ describe('<PwaPrompt />', () => {
     expect(screen.queryByTestId('prompt-overlay')).not.toBeInTheDocument();
     expect(screen.queryByTestId('prompt-wrapper')).not.toBeInTheDocument();
     expect(window.localStorage.getItem('iosPwaPrompt')).toEqual(
-      '{"isiOS":true,"visits":2}'
+      '{"isiOS":true,"visits":2,"dismissedAt":978336000000}'
     );
   });
 
@@ -175,7 +195,7 @@ describe('<PwaPrompt />', () => {
     // Check if the onClose callback was called
     expect(onCloseMock).toHaveBeenCalledTimes(1);
     expect(window.localStorage.getItem('iosPwaPrompt')).toEqual(
-      '{"isiOS":true,"visits":2}'
+      '{"isiOS":true,"visits":2,"dismissedAt":978336000000}'
     );
   });
 
@@ -199,7 +219,7 @@ describe('<PwaPrompt />', () => {
     // Check if the onClose callback was called
     expect(onCloseMock).toHaveBeenCalledTimes(1);
     expect(window.localStorage.getItem('iosPwaPrompt')).toEqual(
-      '{"isiOS":true,"visits":2}'
+      '{"isiOS":true,"visits":2,"dismissedAt":978336000000}'
     );
   });
 });

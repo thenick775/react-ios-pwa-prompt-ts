@@ -11,6 +11,7 @@ export type PwaPromptData =
   | {
       isiOS: boolean;
       visits: number;
+      dismissedAt?: number;
     }
   | undefined;
 
@@ -43,12 +44,17 @@ export const useShouldShowPrompt = ({
   const aboveMinVisits = iosPwaPrompt && iosPwaPrompt.visits >= promptOnVisit;
   const belowMaxVisits =
     iosPwaPrompt && iosPwaPrompt.visits < promptOnVisit + timesToShow;
+  const shouldShowPrompt =
+    iosPwaPrompt?.isiOS &&
+    !iosPwaPrompt?.dismissedAt &&
+    aboveMinVisits &&
+    belowMaxVisits;
 
   return {
     aboveMinVisits,
     belowMaxVisits,
     iosPwaPrompt,
     setIosPwaPrompt,
-    shouldShowPrompt: iosPwaPrompt?.isiOS && aboveMinVisits && belowMaxVisits,
+    shouldShowPrompt,
   };
 };
