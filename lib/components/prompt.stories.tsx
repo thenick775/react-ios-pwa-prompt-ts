@@ -1,6 +1,7 @@
+import { Prompt } from './prompt.tsx';
+
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Prompt } from './prompt.tsx';
 
 const meta: Meta<typeof Prompt> = {
   component: Prompt,

@@ -1,9 +1,10 @@
 import { renderHook } from '@testing-library/react';
+import { beforeEach, describe, expect, it } from 'vitest';
+
 import {
   usePromptStorage,
   useShouldShowPrompt,
 } from './use-should-show-prompt.ts';
-import { beforeEach, describe, expect, it } from 'vitest';
 import { PromptLocalStorageKey } from '../main.ts';
 
 describe('usePromptStorage', () => {

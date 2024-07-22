@@ -1,4 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
+import * as rddExports from 'react-device-detect';
 import {
   afterAll,
   afterEach,
@@ -12,9 +14,7 @@ import {
 
 import { PwaPrompt } from './pwa-prompt.tsx';
 
-import * as rddExports from 'react-device-detect';
 
-import { userEvent } from '@testing-library/user-event';
 
 type iOSNavigator = Navigator & { standalone?: boolean };
 
