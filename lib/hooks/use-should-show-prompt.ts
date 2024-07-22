@@ -4,7 +4,7 @@ type UseShouldShowPromptProps = {
   promptLocalStorageKey: string;
   promptOnVisit?: number;
   timesToShow?: number;
-  withOutDefaults?: boolean;
+  withoutDefaults?: boolean;
 };
 
 export type PwaPromptData =
@@ -17,11 +17,11 @@ export type PwaPromptData =
 
 export const usePromptStorage = (
   promptLocalStorageKey: string,
-  withOutDefaults: boolean
+  withoutDefaults: boolean
 ) => {
   return useLocalStorage<PwaPromptData>(
     promptLocalStorageKey,
-    !withOutDefaults
+    !withoutDefaults
       ? {
           isiOS: false,
           visits: 0,
@@ -34,11 +34,11 @@ export const useShouldShowPrompt = ({
   promptLocalStorageKey,
   promptOnVisit = 1,
   timesToShow = 1,
-  withOutDefaults = false,
+  withoutDefaults: withoutDefaults = false,
 }: UseShouldShowPromptProps) => {
   const [iosPwaPrompt, setIosPwaPrompt] = usePromptStorage(
     promptLocalStorageKey,
-    withOutDefaults
+    withoutDefaults
   );
 
   const aboveMinVisits = iosPwaPrompt && iosPwaPrompt.visits >= promptOnVisit;

@@ -21,7 +21,7 @@ describe('usePromptStorage', () => {
     expect(storageData).toEqual({ isiOS: false, visits: 0 });
   });
 
-  it('returns undefined if withOutDefaults is true and storage has not been updated', () => {
+  it('returns undefined if withoutDefaults is true and storage has not been updated', () => {
     const { result } = renderHook(() =>
       usePromptStorage(PromptLocalStorageKey, true)
     );
@@ -41,7 +41,7 @@ describe('usePromptStorage', () => {
     expect(storageData).toEqual({ isiOS: true, visits: 2 });
   });
 
-  it('returns prompt data from storage if withOutDefaults is true', () => {
+  it('returns prompt data from storage if withoutDefaults is true', () => {
     localStorage.setItem(PromptLocalStorageKey, '{"isiOS":true,"visits":2}');
 
     const { result } = renderHook(() =>
