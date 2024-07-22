@@ -19,7 +19,7 @@ export {
 // hooks
 export {
   usePromptStorage,
-  useShouldShowPrompt,
   type PwaPromptData,
-} from './hooks/use-should-show-prompt.ts';
+} from './hooks/use-prompt-storage.ts';
+export { useShouldShowPrompt } from './hooks/use-should-show-prompt.ts';
 export { useUpdatePromptStorage } from './hooks/use-update-prompt-storage.ts';
