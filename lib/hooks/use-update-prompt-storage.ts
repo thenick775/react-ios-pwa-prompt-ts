@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useLayoutEffect } from 'react';
 import { useDeviceSelectors } from 'react-device-detect';
+
 import { PwaPromptData } from './use-should-show-prompt.ts';
 
 type UseUpdatePromptStorageProps = {

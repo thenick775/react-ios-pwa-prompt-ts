@@ -1,6 +1,6 @@
-import { styled } from 'styled-components';
-import { IoShareOutline } from 'react-icons/io5';
 import { FaRegSquarePlus } from 'react-icons/fa6';
+import { IoShareOutline } from 'react-icons/io5';
+import { styled } from 'styled-components';
 
 type PromptCopyProps = {
   $bold?: boolean;

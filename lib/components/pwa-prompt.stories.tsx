@@ -1,11 +1,12 @@
+import { linkTo } from '@storybook/addon-links';
 import { Title, Subtitle, Controls, Story, Stories } from '@storybook/blocks';
-import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import { ComponentProps, useState } from 'react';
 
 import { PwaPrompt } from './pwa-prompt.tsx';
 
-import { linkTo } from '@storybook/addon-links';
+import type { Meta, StoryObj } from '@storybook/react';
+
 
 type PwaPromptPropsAndCustomArgs = ComponentProps<typeof PwaPrompt> & {
   useragent?: string;
