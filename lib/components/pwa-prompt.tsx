@@ -54,15 +54,16 @@ export const PwaPrompt = ({
 
   const onAfterDismiss = useCallback(
     (e: TransitionEvent) => {
-      if (permanentlyHideOnDismiss)
-        setIosPwaPrompt(
-          (prevState) =>
-            prevState && {
-              ...prevState,
-              visits: promptOnVisit + timesToShow,
-              dismissedAt: Date.now(),
-            }
-        );
+      setIosPwaPrompt(
+        (prevState) =>
+          prevState && {
+            ...prevState,
+            visits: permanentlyHideOnDismiss
+              ? promptOnVisit + timesToShow
+              : prevState.visits,
+            dismissedAt: Date.now(),
+          }
+      );
 
       if (onClose) onClose(e);
     },
