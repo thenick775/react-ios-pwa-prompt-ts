@@ -11,7 +11,7 @@ export const useShouldShowPrompt = ({
   promptLocalStorageKey,
   promptOnVisit = 1,
   timesToShow = 1,
-  withoutDefaults: withoutDefaults = false,
+  withoutDefaults = false,
 }: UseShouldShowPromptProps) => {
   const [iosPwaPrompt, setIosPwaPrompt] = usePromptStorage(
     promptLocalStorageKey,
