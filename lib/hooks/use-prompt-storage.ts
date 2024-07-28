@@ -4,7 +4,8 @@ export type PwaPromptData =
   | {
       isiOS: boolean; // represents whether or not the device is considered iphone/ipad
       visits: number; // represents current prompt render (visit) count
-      dismissedAt?: number; // represents when the user dismissed the prompt as a UTC epoch
+      isPermanentlyDismissed?: boolean; // represents if the prompt is permanently dismissed
+      lastDismissedAt?: number; // represents when the user last dismissed the prompt as a UTC epoch
     }
   | undefined;
 

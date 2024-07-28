@@ -31,7 +31,7 @@ export const useUpdatePromptStorage = ({
           ...prevState,
           isiOS,
           visits:
-            isiOS && !prevState?.dismissedAt
+            isiOS && !prevState?.isPermanentlyDismissed
               ? currentVisits + 1
               : currentVisits,
         };

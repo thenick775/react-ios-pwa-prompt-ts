@@ -1,4 +1,4 @@
-import { useCallback, type TransitionEvent } from 'react';
+import { useCallback, useState, type TransitionEvent } from 'react';
 
 import { Prompt } from './prompt.tsx';
 import { useUpdatePromptStorage } from '../hooks/use-update-prompt-storage.ts';
@@ -46,6 +46,7 @@ export const PwaPrompt = ({
     promptOnVisit,
     timesToShow,
   });
+  const [isDismissed, setIsDismissed] = useState(false);
 
   useUpdatePromptStorage({
     setIosPwaPrompt,
@@ -58,25 +59,23 @@ export const PwaPrompt = ({
         (prevState) =>
           prevState && {
             ...prevState,
-            visits: permanentlyHideOnDismiss
-              ? promptOnVisit + timesToShow
-              : prevState.visits,
-            dismissedAt: Date.now(),
+            isPermanentlyDismissed: permanentlyHideOnDismiss,
+            lastDismissedAt: Date.now(),
           }
       );
 
+      setIsDismissed(true);
+
       if (onClose) onClose(e);
     },
-    [
-      onClose,
-      permanentlyHideOnDismiss,
-      promptOnVisit,
-      setIosPwaPrompt,
-      timesToShow,
-    ]
+    [onClose, permanentlyHideOnDismiss, setIosPwaPrompt]
   );
 
-  if ((!shouldShowPrompt || isOpen === false) && !isOpen === true) return null;
+  if (
+    (!shouldShowPrompt || isDismissed || isOpen === false) &&
+    !isOpen === true
+  )
+    return null;
 
   return (
     <Prompt
