@@ -23,7 +23,7 @@ export const useShouldShowPrompt = ({
     iosPwaPrompt && iosPwaPrompt.visits < promptOnVisit + timesToShow;
   const shouldShowPrompt =
     iosPwaPrompt?.isiOS &&
-    !iosPwaPrompt?.dismissedAt &&
+    !iosPwaPrompt?.isPermanentlyDismissed &&
     aboveMinVisits &&
     belowMaxVisits;
 

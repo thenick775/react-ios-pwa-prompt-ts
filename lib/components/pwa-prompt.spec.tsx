@@ -14,8 +14,6 @@ import {
 
 import { PwaPrompt } from './pwa-prompt.tsx';
 
-
-
 type iOSNavigator = Navigator & { standalone?: boolean };
 
 describe('<PwaPrompt />', () => {
@@ -149,7 +147,7 @@ describe('<PwaPrompt />', () => {
     expect(screen.queryByTestId('prompt-overlay')).not.toBeInTheDocument();
     expect(screen.queryByTestId('prompt-wrapper')).not.toBeInTheDocument();
     expect(window.localStorage.getItem('iosPwaPrompt')).toEqual(
-      '{"isiOS":true,"visits":2,"dismissedAt":978307200000}'
+      '{"isiOS":true,"visits":1,"isPermanentlyDismissed":true,"lastDismissedAt":978307200000}'
     );
   });
 
@@ -171,7 +169,7 @@ describe('<PwaPrompt />', () => {
     expect(screen.queryByTestId('prompt-overlay')).not.toBeInTheDocument();
     expect(screen.queryByTestId('prompt-wrapper')).not.toBeInTheDocument();
     expect(window.localStorage.getItem('iosPwaPrompt')).toEqual(
-      '{"isiOS":true,"visits":2,"dismissedAt":978307200000}'
+      '{"isiOS":true,"visits":1,"isPermanentlyDismissed":true,"lastDismissedAt":978307200000}'
     );
   });
 
@@ -195,7 +193,7 @@ describe('<PwaPrompt />', () => {
     // Check if the onClose callback was called
     expect(onCloseMock).toHaveBeenCalledTimes(1);
     expect(window.localStorage.getItem('iosPwaPrompt')).toEqual(
-      '{"isiOS":true,"visits":2,"dismissedAt":978307200000}'
+      '{"isiOS":true,"visits":1,"isPermanentlyDismissed":true,"lastDismissedAt":978307200000}'
     );
   });
 
@@ -219,7 +217,7 @@ describe('<PwaPrompt />', () => {
     // Check if the onClose callback was called
     expect(onCloseMock).toHaveBeenCalledTimes(1);
     expect(window.localStorage.getItem('iosPwaPrompt')).toEqual(
-      '{"isiOS":true,"visits":2,"dismissedAt":978307200000}'
+      '{"isiOS":true,"visits":1,"isPermanentlyDismissed":true,"lastDismissedAt":978307200000}'
     );
   });
 });
