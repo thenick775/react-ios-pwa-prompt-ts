@@ -1,4 +1,4 @@
-import { useLocalStorage } from 'usehooks-ts';
+import { useLocalStorage } from '@uidotdev/usehooks';
 
 export type PwaPromptData =
   | {

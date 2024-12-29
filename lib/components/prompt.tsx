@@ -1,5 +1,5 @@
+import { useLockBodyScroll } from '@uidotdev/usehooks';
 import { useState, useId, type TransitionEvent } from 'react';
-import { useInterval, useScrollLock } from 'usehooks-ts';
 
 import {
   PromptOverlay,
@@ -15,6 +15,7 @@ import {
   PromptInstructionStep,
   PromptAddToHomeIcon,
 } from './styled.tsx';
+import { useInterval } from '../hooks/use-interval.ts';
 
 type PromptProps = {
   delay: number;
@@ -43,7 +44,7 @@ export const Prompt = ({
   const promptDescriptionId = useId();
   const promptTitleId = useId();
 
-  useScrollLock();
+  useLockBodyScroll();
 
   useInterval(() => setVisibility(true), delay && !isVisible ? delay : null);
 
