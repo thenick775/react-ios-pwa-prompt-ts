@@ -3,6 +3,7 @@ import { useCallback, useState, type TransitionEvent } from 'react';
 import { Prompt } from './prompt.tsx';
 import { useUpdatePromptStorage } from '../hooks/use-update-prompt-storage.ts';
 import { useShouldShowPrompt } from '../main.ts';
+import { PromptLocalStorageKey } from './consts.tsx';
 
 type PwaPromptProps = {
   className?: string;
@@ -21,8 +22,6 @@ type PwaPromptProps = {
   timesToShow?: number;
   transitionDuration?: number;
 };
-
-export const PromptLocalStorageKey = 'iosPwaPrompt';
 
 export const PwaPrompt = ({
   className,
