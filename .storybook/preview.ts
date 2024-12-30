@@ -1,5 +1,6 @@
-import type { Preview } from '@storybook/react';
 import { customUserAgents } from './userAgent';
+
+import type { Preview } from '@storybook/react';
 
 const preview: Preview = {
   parameters: {

@@ -1,7 +1,7 @@
-import { Dispatch, SetStateAction, useLayoutEffect } from 'react';
+import { useLayoutEffect, type Dispatch, type SetStateAction } from 'react';
 import { useDeviceSelectors } from 'react-device-detect';
 
-import { PwaPromptData } from './use-prompt-storage.ts';
+import type { PwaPromptData } from './use-prompt-storage.ts';
 
 type UseUpdatePromptStorageProps = {
   setIosPwaPrompt: Dispatch<SetStateAction<PwaPromptData>>;
