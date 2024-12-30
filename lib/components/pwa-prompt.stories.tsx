@@ -1,12 +1,17 @@
 import { linkTo } from '@storybook/addon-links';
-import { Title, Subtitle, Controls, Story, Stories } from '@storybook/blocks';
+import {
+  Title,
+  Subtitle,
+  Controls,
+  Stories,
+  type Story,
+} from '@storybook/blocks';
 import { fn } from '@storybook/test';
-import { ComponentProps, useState } from 'react';
+import { useState, type ComponentProps } from 'react';
 
 import { PwaPrompt } from './pwa-prompt.tsx';
 
 import type { Meta, StoryObj } from '@storybook/react';
-
 
 type PwaPromptPropsAndCustomArgs = ComponentProps<typeof PwaPrompt> & {
   useragent?: string;
@@ -84,7 +89,7 @@ const meta: Meta<PwaPromptPropsAndCustomArgs> = {
       'Mozilla/5.0 (iPhone; CPU iPhone OS 17_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Mobile/15E148 Safari/604.1',
   },
 };
-
+// eslint-disable-next-line import/no-default-export
 export default meta;
 type Story = StoryObj<PwaPromptPropsAndCustomArgs>;
 
@@ -117,6 +122,7 @@ export const Primary: Story = {
  */
 export const Controlled: Story = {
   render: (args) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>

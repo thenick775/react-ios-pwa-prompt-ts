@@ -2,11 +2,10 @@ import { Prompt } from './prompt.tsx';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-
 const meta: Meta<typeof Prompt> = {
   component: Prompt,
 };
-
+// eslint-disable-next-line import/no-default-export
 export default meta;
 type Story = StoryObj<typeof Prompt>;
 
