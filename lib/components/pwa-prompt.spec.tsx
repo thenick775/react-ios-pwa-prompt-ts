@@ -135,9 +135,12 @@ describe('<PwaPrompt />', () => {
     render(<PwaPrompt />);
 
     // Wait for the delay to pass
-    await waitFor(() => {
-      expect(screen.getByTestId('prompt-overlay')).toBeVisible();
-    });
+    await waitFor(
+      () => {
+        expect(screen.getByTestId('prompt-overlay')).toBeVisible();
+      },
+      { timeout: 2000 }
+    );
 
     // Dismiss the prompt
     await user.click(screen.getByTestId('prompt-overlay'));
@@ -157,9 +160,12 @@ describe('<PwaPrompt />', () => {
     render(<PwaPrompt />);
 
     // Wait for the delay to pass
-    await waitFor(() => {
-      expect(screen.getByTestId('prompt-overlay')).toBeVisible();
-    });
+    await waitFor(
+      () => {
+        expect(screen.getByTestId('prompt-overlay')).toBeVisible();
+      },
+      { timeout: 2000 }
+    );
 
     // Dismiss the prompt
     await user.click(screen.getByTestId('prompt-dismiss-button'));
@@ -180,9 +186,12 @@ describe('<PwaPrompt />', () => {
     render(<PwaPrompt onClose={onCloseMock} />);
 
     // Wait for the delay to pass
-    await waitFor(() => {
-      expect(screen.getByTestId('prompt-overlay')).toBeVisible();
-    });
+    await waitFor(
+      () => {
+        expect(screen.getByTestId('prompt-overlay')).toBeVisible();
+      },
+      { timeout: 2000 }
+    );
 
     // Dismiss the prompt
     await user.click(screen.getByTestId('prompt-overlay'));
@@ -204,9 +213,12 @@ describe('<PwaPrompt />', () => {
     render(<PwaPrompt onClose={onCloseMock} />);
 
     // Wait for the delay to pass
-    await waitFor(() => {
-      expect(screen.getByTestId('prompt-overlay')).toBeVisible();
-    });
+    await waitFor(
+      () => {
+        expect(screen.getByTestId('prompt-overlay')).toBeVisible();
+      },
+      { timeout: 2000 }
+    );
 
     // Dismiss the prompt
     await user.click(screen.getByTestId('prompt-dismiss-button'));
