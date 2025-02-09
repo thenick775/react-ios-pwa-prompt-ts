@@ -1,4 +1,4 @@
-import { customUserAgents } from './userAgent';
+import { customUserAgents } from './userAgent.ts';
 
 import type { Preview } from '@storybook/react';
 
