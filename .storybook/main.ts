@@ -16,4 +16,6 @@ const config: StorybookConfig = {
     reactDocgen: 'react-docgen-typescript',
   },
 };
+
+// eslint-disable-next-line import/no-default-export
 export default config;

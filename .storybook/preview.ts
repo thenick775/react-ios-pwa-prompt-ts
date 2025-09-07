@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-unresolved
+import { INITIAL_VIEWPORTS } from 'storybook/viewport';
+
 import { customUserAgents } from './userAgent.ts';
 
 import type { Preview, Decorator } from '@storybook/react';
@@ -48,6 +51,9 @@ const preview: Preview = {
         order: ['components', ['pwa-prompt', 'prompt']],
       },
     },
+    viewport: {
+      options: INITIAL_VIEWPORTS,
+    },
   },
   initialGlobals: {
     backgrounds: { value: 'dark' },
@@ -55,4 +61,5 @@ const preview: Preview = {
   },
 };
 
+// eslint-disable-next-line import/no-default-export
 export default preview;
