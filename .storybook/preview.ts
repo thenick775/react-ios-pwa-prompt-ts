@@ -1,6 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
-import { INITIAL_VIEWPORTS } from 'storybook/viewport';
-
 import { customUserAgents } from './userAgent.ts';
 
 import type { Preview, Decorator } from '@storybook/react';
@@ -23,12 +20,11 @@ export const globalTypes = {
   },
 };
 
-function applyUserAgent(ua?: string) {
+const applyUserAgent = (ua?: string) =>
   Object.defineProperty(window.navigator, 'userAgent', {
     configurable: true,
     get: () => ua,
   });
-}
 
 export const decorators: Decorator[] = [
   (Story, context) => {
@@ -50,9 +46,6 @@ const preview: Preview = {
       storySort: {
         order: ['components', ['pwa-prompt', 'prompt']],
       },
-    },
-    viewport: {
-      options: INITIAL_VIEWPORTS,
     },
   },
   initialGlobals: {
