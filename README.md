@@ -1,6 +1,6 @@
 # react-ios-pwa-prompt-ts
 
-Forked with care from [react-ios-pwa-prompt](https://github.com/chrisdancee/react-ios-pwa-prompt), this package is revamped using Vite, Styled Components, and TypeScript.
+Forked with care from [react-ios-pwa-prompt](https://github.com/chrisdancee/react-ios-pwa-prompt), this package is revamped using Vite, Emotion, and TypeScript.
 
 ## Summary
 
@@ -20,7 +20,7 @@ A React component that provides a customizable Progressive Web App (PWA) prompt 
 - 📃 Customize prompt content based on PWA availability and full-screen mode.
 - ⚡️ Efficient: Minimal overhead for non-iOS devices, optimizing each page load.
 - 🌕 Dark mode support: Adapts to iOS 13 and 14 settings.
-- 🎨 Supports custom styling with `styled-components`
+- 🎨 Supports custom styling with `emotion`
 
 ## Usage
 
@@ -33,7 +33,8 @@ npm i react-ios-pwa-prompt-ts
 2. Add peer dependencies if not already included in your application:
 
 ```
-npm i react styled-components
+npm i @emotion/react && \
+npm i @emotion/styled
 ```
 
 3. Import into your project:

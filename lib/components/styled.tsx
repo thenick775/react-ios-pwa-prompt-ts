@@ -1,6 +1,8 @@
+import styled from '@emotion/styled';
 import { FaRegSquarePlus } from 'react-icons/fa6';
 import { IoShareOutline } from 'react-icons/io5';
-import { styled } from 'styled-components';
+
+import type { IconBaseProps } from 'react-icons';
 
 type PromptCopyProps = {
   $bold?: boolean;
@@ -10,6 +12,10 @@ type VisibleElementProps = {
   $isVisible?: boolean;
   $transitionDuration?: number;
 };
+
+const IoShareOutlineViewBox = (props: IconBaseProps) => (
+  <IoShareOutline viewBox="55 0 512 512" {...props} />
+);
 
 export const PromptOverlay = styled.div<VisibleElementProps>`
   background-color: rgba(10, 10, 10, 0.5);
@@ -145,9 +151,7 @@ export const PromptDescription = styled.div`
   }
 `;
 
-export const PromptShareIcon = styled(IoShareOutline).attrs({
-  viewBox: '55 0 512 512',
-})`
+export const PromptShareIcon = styled(IoShareOutlineViewBox)`
   color: rgba(0, 85, 179, 1);
   height: 44px;
   margin-right: 15px;
