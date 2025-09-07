@@ -1,17 +1,19 @@
-import { linkTo } from '@storybook/addon-links';
 import {
   Title,
   Subtitle,
   Controls,
   Stories,
   type Story,
-} from '@storybook/blocks';
-import { fn } from '@storybook/test';
+  // eslint-disable-next-line import/no-unresolved
+} from '@storybook/addon-docs/blocks';
+import { linkTo } from '@storybook/addon-links';
 import { useState, type ComponentProps } from 'react';
+// eslint-disable-next-line import/no-unresolved
+import { fn } from 'storybook/test';
 
 import { PwaPrompt } from './pwa-prompt.tsx';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 type PwaPromptPropsAndCustomArgs = ComponentProps<typeof PwaPrompt> & {
   useragent?: string;
