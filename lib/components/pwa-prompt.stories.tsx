@@ -5,13 +5,13 @@ import {
   Controls,
   Stories,
   type Story,
-} from '@storybook/blocks';
-import { fn } from '@storybook/test';
+} from '@storybook/addon-docs/blocks';
+import { fn } from 'storybook/test';
 import { useState, type ComponentProps } from 'react';
 
 import { PwaPrompt } from './pwa-prompt.tsx';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 type PwaPromptPropsAndCustomArgs = ComponentProps<typeof PwaPrompt> & {
   useragent?: string;

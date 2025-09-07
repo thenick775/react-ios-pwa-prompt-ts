@@ -5,8 +5,8 @@ const config: StorybookConfig = {
 
   addons: [
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
     'storybook-addon-useragent',
+    '@storybook/addon-docs'
   ],
 
   framework: {
