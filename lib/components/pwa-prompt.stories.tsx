@@ -1,13 +1,15 @@
-import { linkTo } from '@storybook/addon-links';
 import {
   Title,
   Subtitle,
   Controls,
   Stories,
   type Story,
+  // eslint-disable-next-line import/no-unresolved
 } from '@storybook/addon-docs/blocks';
-import { fn } from 'storybook/test';
+import { linkTo } from '@storybook/addon-links';
 import { useState, type ComponentProps } from 'react';
+// eslint-disable-next-line import/no-unresolved
+import { fn } from 'storybook/test';
 
 import { PwaPrompt } from './pwa-prompt.tsx';
 
