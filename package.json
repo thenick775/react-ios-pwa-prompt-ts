@@ -1,6 +1,6 @@
 {
   "name": "react-ios-pwa-prompt-ts",
-  "version": "1.3.0-beta.1",
+  "version": "1.3.0",
   "type": "module",
   "author": {
     "name": "Nicholas VanCise",
@@ -76,7 +76,7 @@
     "eslint-plugin-storybook": "^9.1.5",
     "eslint-plugin-testing-library": "^7.1.1",
     "globals": "^16.0.0",
-    "jsdom": "^26.0.0",
+    "jsdom": "^27.0.0",
     "react": "^18.2.15",
     "react-dom": "^18.2.15",
     "rollup-plugin-visualizer": "^6.0.3",
