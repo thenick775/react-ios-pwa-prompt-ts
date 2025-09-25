@@ -20,7 +20,7 @@ A React component that provides a customizable Progressive Web App (PWA) prompt 
 - 📃 Customize prompt content based on PWA availability and full-screen mode.
 - ⚡️ Efficient: Minimal overhead for non-iOS devices, optimizing each page load.
 - 🌕 Dark mode support: Adapts to iOS 13 and 14 settings.
-- 🎨 Supports custom styling with `emotion`
+- 🎨 Supports custom styling with `emotion` styled
 
 ## Usage
 

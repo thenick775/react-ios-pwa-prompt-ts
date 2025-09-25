@@ -88,8 +88,9 @@
     "vitest": "^3.0.5"
   },
   "peerDependencies": {
-    "@emotion/react": "^11.0.0",
-    "@emotion/styled": "^11.0.0",
-    "react": ">=18.2.0"
+    "@emotion/react": "^11.x",
+    "@emotion/styled": "^11.x",
+    "react": "^18.x || ^19.x",
+    "react-dom": "^18.x || ^19.x"
   }
 }
