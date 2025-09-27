@@ -4,7 +4,6 @@ import importPlugin from 'eslint-plugin-import';
 import jsxA11Y from 'eslint-plugin-jsx-a11y';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
-import styledA11y from 'eslint-plugin-styled-components-a11y';
 import testingLibrary from 'eslint-plugin-testing-library';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -14,7 +13,6 @@ export default [
   js.configs.recommended,
   importPlugin.flatConfigs.recommended,
   jsxA11Y.flatConfigs.recommended,
-  styledA11y.flatConfigs.recommended,
   testingLibrary.configs['flat/dom'],
   ...tseslint.configs.recommended,
   ...storybook.configs['flat/recommended'],

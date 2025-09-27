@@ -18,13 +18,23 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: ['react', 'styled-components'],
+      external: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        '@emotion/react',
+        '@emotion/styled',
+      ],
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps
         globals: {
           react: 'React',
+          'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'ReactJsxRuntime',
           'styled-components': 'styled',
+          '@emotion/react': 'emotionReact',
+          '@emotion/styled': 'emotionStyled',
         },
       },
     },
